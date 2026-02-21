@@ -1,0 +1,442 @@
+@import url("./components/common/common.css");
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+}
+
+#body-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 150vh;
+    max-height: 150vh;
+}
+
+main {
+    flex: 1;
+    background: linear-gradient(to bottom, #3b0764, #581c87, #6b21a8, #000000);
+    width: 100%;
+    color: white;
+    padding: 1rem;
+}
+
+.loading-page-main-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spin {
+    animation: spin 2s linear infinite;
+    width: 200px;
+    height: 200px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.start-button {
+    box-shadow: 1rem 1rem 10rem rgb(168, 85, 247);
+}
+
+.album-card {
+    border: none;
+    cursor: pointer;
+}
+
+.album-card-no-pointer{
+    border: none;
+    cursor: default;
+}
+
+.album-artwork {
+    width: 200px;
+    height: 200px;
+    margin: 50px 0px;
+}
+
+.expanded-album-details-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.expanded-album-review-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2vh;
+}
+
+.key-album-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding-left: 15px;
+    place-items: center;
+    flex: 1
+}
+
+.album-datapoint-card {
+    border: none;
+    text-align: center;
+}
+
+.data-heading {
+    font-weight: normal;
+}
+
+.data-category {
+    font-weight: bold;
+    text-decoration-line: underline;
+    text-decoration-color: rgb(192 132 252);
+    text-decoration-thickness: 0.1rem;
+}
+
+.user-review-card {
+    flex: 1;
+    padding: 2vw
+}
+
+#user-stats-log-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    place-items: center;
+}
+
+.listening-stat-card {
+    padding: 10px 10px;
+    width: 20rem;
+    text-align: center;
+}
+
+.listening-stats-table {
+    width: 100%;
+}
+
+.listening-stats-table th,
+.listening-stats-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.listening-stats-table th {
+    font-weight: bold;
+    text-decoration-line: underline;
+    text-decoration-color: rgb(192 132 252);
+    text-decoration-thickness: 0.15rem;
+}
+
+.recently-listened-shelf {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.about-divider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.about-section-heading-and-image {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.about-divider p {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding-right: 2rem;
+}
+
+.album-search-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.album-search-box {
+    width: 70vw;
+    height: 50px;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.search-button {
+    width: 10vw;
+    height: 50px;
+    font-size: 1.5rem;
+}
+
+.search-results-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    align-items: start;
+    gap: 1rem;
+    border: none;
+    margin: 50px 50px;
+    padding: 1rem;
+
+    box-sizing: border-box;
+
+}
+
+.album-artwork {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 0;
+}
+
+.add-album-button {
+    width: 10vw;
+    height: 50px;
+    font-size: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.add-album-button:hover {
+    background-color: rgb(192 132 252);
+}
+
+.review-page-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.selected-album-review-data {
+    text-align: center;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#album-rating-selector {
+    color: white;
+    background-color: #6b21a8;
+    border: 0.1rem solid rgb(192 132 252);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#album-rating-selector:hover {
+    background-color: rgb(192 132 252);
+}
+
+.review-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.album-review-input-content {
+    height: 45vh;
+    width: 45vw;
+    margin-bottom: 2vh;
+    font-size: 1rem;
+    padding: 1rem;
+    border: 0.2rem solid rgb(192 132 252);
+    border-radius: 8px;
+}
+
+.submit-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45vw;
+}
+
+.submit-options input[type="submit"] {
+    background-color: #6b21a8;
+    border: 0.1rem solid rgb(192 132 252);
+    width: 8rem;
+    height: 45px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+}
+
+.submit-options input[type="submit"]:hover {
+    background-color: rgb(192 132 252);
+}
+
+.submit-options button {
+    width: 8rem;
+    height: 45px;
+    border: 0.1rem solid black;
+    font-size: 1rem;
+    background-color: rgb(206, 206, 206);
+}
+
+.submit-options button:hover {
+    background-color: rgb(250, 56, 56);
+}
+
+.user-profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-pic-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+}
+
+.profile-pic {
+    width: 200px;
+    height: 200px;
+}
+
+.profile-stat {
+    padding: 10px 10px;
+    width: 8rem;
+    text-align: center;
+}
+
+
+/** MEDIA QUERIES **/
+/* Tablet (≤1024px) */
+
+@media screen and (max-width: 1024px) {
+
+
+    .recently-listened-shelf {
+        grid-template-columns: repeat(3, 1fr);
+        margin: 30px 30px;
+        gap: 0.75rem;
+    }
+
+
+    .favorites-display {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .search-results-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+    .recently-listened-shelf {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 30px 30px;
+        gap: 0.75rem;
+    }
+
+    .about-divider {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-divider p {
+        padding-right: 0;
+        text-align: justify;
+    }
+
+    .review-page-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .album-review-input-content {
+        width: 75vw;
+        height: 30vh;
+        font-size: 1.3rem;
+    }
+
+    #album-rating-selector {
+        font-size: 1.5rem;
+    }
+
+    .overlay-button {
+        background-color: #6b21a8;
+        border: 0.1rem solid rgb(192 132 252);
+        width: 8rem;
+        height: 45px;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        color: white;
+    }
+
+}
+
+/* Smaller Screen (≤500px) */
+@media screen and (max-width: 500px) {
+    .favorites-display {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .album-artwork {
+        width: 150px;
+        height: 150px;
+    }
+
+    .key-album-data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-results-section {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .add-album-button {
+        width: 25vw;
+    }
+}
