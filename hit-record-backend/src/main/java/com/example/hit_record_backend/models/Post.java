@@ -1,6 +1,7 @@
 package com.example.hit_record_backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -34,6 +35,7 @@ public class Post {
 
     // Relationship with Album
     @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Album album;
 
     // Getters + Setters

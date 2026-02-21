@@ -1,5 +1,6 @@
 package com.example.hit_record_backend.controllers;
 
+import com.example.hit_record_backend.models.Album;
 import com.example.hit_record_backend.models.Post;
 import com.example.hit_record_backend.models.User;
 import com.example.hit_record_backend.repositories.PostRepository;
@@ -32,8 +33,17 @@ public class PostController {
 
     @PostMapping
     public Post createPost(@RequestBody Post post){
-        User postUser = userRepository.findById(post.getUser().getId()).orElseThrow(()-> new RuntimeException("User not found"));
+        // Fetch managed user
+        User postUser = userRepository.findById(post.getUser().getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
         post.setUser(postUser);
+
+        // Ensure album is attached
+        Album album = post.getAlbum();
+        if (album == null) throw new RuntimeException("Album is required");
+        album.setPost(post);  // set owning side for JPA
+
+        // Save post (cascades album)
         return postRepository.save(post);
     }
 
