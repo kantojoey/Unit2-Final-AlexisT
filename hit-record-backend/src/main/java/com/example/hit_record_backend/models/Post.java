@@ -1,5 +1,6 @@
 package com.example.hit_record_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -28,6 +29,7 @@ public class Post {
     // Relationship with User
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     // Relationship with Album
@@ -91,5 +93,11 @@ public class Post {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    // Method to automatically set the createdAt time
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 }
