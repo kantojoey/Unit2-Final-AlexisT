@@ -1,5 +1,6 @@
 package com.example.hit_record_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -26,6 +27,7 @@ public class Album {
     // Relationship with Posts
     @OneToOne
     @JoinColumn(name = "post_id", nullable = false, unique = true)
+    @JsonBackReference
     private Post post;
 
     // Getters + Setters
