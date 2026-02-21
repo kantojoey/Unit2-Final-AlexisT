@@ -1,6 +1,5 @@
 package com.example.hit_record_backend.controllers;
 
-
 import com.example.hit_record_backend.models.User;
 import com.example.hit_record_backend.repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
