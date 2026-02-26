@@ -38,6 +38,16 @@ public class Post {
     @JsonManagedReference
     private Album album;
 
+    // Constructors
+    public Post(Long id, Integer rating, String reviewBodyText, LocalDateTime createdAt){
+        this.id = id;
+        this.rating = rating;
+        this.reviewBodyText = reviewBodyText;
+        this.createdAt = createdAt;
+    }
+
+    public Post(){}
+
     // Getters + Setters
 
 

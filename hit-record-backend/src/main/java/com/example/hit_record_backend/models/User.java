@@ -33,6 +33,17 @@ public class User {
     @JsonManagedReference
     private List<Post> posts;
 
+    // Constructors
+    public User(Long id, String firstName, String lastName, String username, String password){
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(){}
+
     // Getters + Setters
 
 
