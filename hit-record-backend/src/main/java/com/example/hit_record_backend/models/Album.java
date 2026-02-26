@@ -30,6 +30,17 @@ public class Album {
     @JsonBackReference
     private Post post;
 
+    // Constructors
+    public Album(Long id, String title, String artist, Integer yearReleased, Integer numberOfTracks){
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.yearReleased = yearReleased;
+        this.numberOfTracks = numberOfTracks;
+    }
+
+    public Album(){}
+
     // Getters + Setters
 
     public Long getId() {
