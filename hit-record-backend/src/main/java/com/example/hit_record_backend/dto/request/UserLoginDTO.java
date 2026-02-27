@@ -1,4 +1,4 @@
-package com.example.hit_record_backend.dto;
+package com.example.hit_record_backend.dto.request;
 
 public class UserLoginDTO {
     private String username;
