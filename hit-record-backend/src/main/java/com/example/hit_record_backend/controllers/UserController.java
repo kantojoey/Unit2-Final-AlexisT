@@ -1,37 +1,37 @@
 package com.example.hit_record_backend.controllers;
 
-import com.example.hit_record_backend.dto.UserLoginDTO;
+import com.example.hit_record_backend.dto.request.UserLoginDTO;
+import com.example.hit_record_backend.dto.request.UserRegistrationDTO;
+import com.example.hit_record_backend.dto.response.UserResponseDTO;
 import com.example.hit_record_backend.models.User;
 import com.example.hit_record_backend.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponseDTO> getAllUsers() {
+        return userRepository.findAll().stream().map(user -> new UserResponseDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername())).collect(Collectors.toList());
     }
 
 
     // User Registration
-    // #TODO Create user registration DTO in order to hide password in response body
     @PostMapping("/register")
     // Response Entity allows more control over the HTTP status message
     // newUser represents the user object being posted from front-end after the user registers on form
-    public ResponseEntity<User> register(@RequestBody User newUser) {
+    public ResponseEntity<UserResponseDTO> register(@RequestBody UserRegistrationDTO newUser) {
         // Optional lets us handle if the user exists or doesn't exist
         // Uses custom search query from interface to find by the username to check if it exists in database
         Optional<User> existingUser = userRepository.findByUsername(newUser.getUsername().trim());
@@ -42,8 +42,14 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         // Otherwise, it will save the new user's info in the database
-        User savedUser = userRepository.save(newUser);
-        return ResponseEntity.ok(savedUser);
+        User user = new User();
+        user.setFirstName(newUser.getFirstName());
+        user.setLastName(newUser.getLastName());
+        user.setUsername(newUser.getUsername());
+        user.setPassword(newUser.getPassword());
+
+        User savedUser = userRepository.save(user);
+        return ResponseEntity.ok(new UserResponseDTO(savedUser.getId(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getPassword()));
     }
 
     // User Login
