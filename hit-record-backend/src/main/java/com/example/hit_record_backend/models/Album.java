@@ -16,7 +16,7 @@ public class Album {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String externalId;
+    private String spotifyAlbumId;
 
     @Column(nullable = false)
     private String title;
@@ -35,8 +35,9 @@ public class Album {
     private List<Post> posts = new ArrayList<>();
 
     // Constructors
-    public Album(Long id, String title, String artist, Integer yearReleased, Integer numberOfTracks){
+    public Album(Long id, String spotifyAlbumId,String title, String artist, Integer yearReleased, Integer numberOfTracks){
         this.id = id;
+        this.spotifyAlbumId = spotifyAlbumId;
         this.title = title;
         this.artist = artist;
         this.yearReleased = yearReleased;
@@ -55,12 +56,12 @@ public class Album {
         this.id = id;
     }
 
-    public String getExternalId() {
-        return externalId;
+    public String getSpotifyAlbumId() {
+        return spotifyAlbumId;
     }
 
-    public void setExternalId(String externalId) {
-        this.externalId = externalId;
+    public void setSpotifyAlbumId(String spotifyAlbumId) {
+        this.spotifyAlbumId = spotifyAlbumId;
     }
 
     public String getTitle() {
