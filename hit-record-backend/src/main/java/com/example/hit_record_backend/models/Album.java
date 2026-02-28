@@ -3,6 +3,9 @@ package com.example.hit_record_backend.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "albums")
 public class Album {
@@ -11,6 +14,9 @@ public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String externalId;
 
     @Column(nullable = false)
     private String title;
@@ -25,10 +31,8 @@ public class Album {
     private Integer numberOfTracks;
 
     // Relationship with Posts
-    @OneToOne
-    @JoinColumn(name = "post_id", nullable = false, unique = true)
-    @JsonBackReference
-    private Post post;
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
 
     // Constructors
     public Album(Long id, String title, String artist, Integer yearReleased, Integer numberOfTracks){
@@ -49,6 +53,14 @@ public class Album {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
 
     public String getTitle() {
@@ -83,11 +95,11 @@ public class Album {
         this.numberOfTracks = numberOfTracks;
     }
 
-    public Post getPost() {
-        return post;
+    public List<Post> getPosts() {
+        return posts;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
