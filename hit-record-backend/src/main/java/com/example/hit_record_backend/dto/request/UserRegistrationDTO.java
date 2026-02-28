@@ -14,6 +14,8 @@ public class UserRegistrationDTO {
         this.password = password;
     }
 
+    public UserRegistrationDTO(){}
+
 
     public String getFirstName() {
         return firstName;

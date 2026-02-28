@@ -31,21 +31,21 @@ public class PostController {
         return postRepository.findById(id).orElse(null);
     }
 
-    @PostMapping
-    public Post createPost(@RequestBody Post post){
-        // Fetch managed user
-        User postUser = userRepository.findById(post.getUser().getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        post.setUser(postUser);
-
-        // Ensure album is attached
-        Album album = post.getAlbum();
-        if (album == null) throw new RuntimeException("Album is required");
-        album.setPost(post);  // set owning side for JPA
-
-        // Save post (cascades album)
-        return postRepository.save(post);
-    }
+//    @PostMapping
+//    public Post createPost(@RequestBody Post post){
+//        // Fetch managed user
+//        User postUser = userRepository.findById(post.getUser().getId())
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        post.setUser(postUser);
+//
+//        // Ensure album is attached
+//        Album album = post.getAlbum();
+//        if (album == null) throw new RuntimeException("Album is required");
+//        album.setPost(post);  // set owning side for JPA
+//
+//        // Save post (cascades album)
+//        return postRepository.save(post);
+//    }
 
     @DeleteMapping("/{id}")
     public void deletePost(@PathVariable Long id){
