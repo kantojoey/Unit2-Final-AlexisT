@@ -14,6 +14,8 @@ public class UserResponseDTO {
         this.username = username;
     }
 
+    public UserResponseDTO(){}
+
     public Long getId() {
         return id;
     }
