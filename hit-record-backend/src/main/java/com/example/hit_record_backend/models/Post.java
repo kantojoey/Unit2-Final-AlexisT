@@ -34,8 +34,8 @@ public class Post {
     private User user;
 
     // Relationship with Album
-    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "album_id", nullable = false)
     private Album album;
 
     // Constructors
