@@ -43,10 +43,10 @@ public class UserController {
         }
         // Otherwise, it will save the new user's info in the database
         User user = new User();
-        user.setFirstName(newUser.getFirstName());
-        user.setLastName(newUser.getLastName());
-        user.setUsername(newUser.getUsername());
-        user.setPassword(newUser.getPassword());
+        user.setFirstName(newUser.getFirstName().trim());
+        user.setLastName(newUser.getLastName().trim());
+        user.setUsername(newUser.getUsername().trim());
+        user.setPassword(newUser.getPassword().trim());
 
         User savedUser = userRepository.save(user);
         return ResponseEntity.ok(new UserResponseDTO(savedUser.getId(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getUsername()));
@@ -87,7 +87,7 @@ public class UserController {
         Optional<User> userById = userRepository.findById(id);
 
         if(userById.isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         User foundUser = userById.get();
