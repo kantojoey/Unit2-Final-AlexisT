@@ -4,13 +4,13 @@ public class PostRequestDTO {
     private Integer rating;
     private String reviewBodyText;
     private Long userId;
-    private String spotifyAlbumId;
+    private AlbumRequestDTO album;
 
-    public PostRequestDTO(Integer rating, String reviewBodyText, Long userId, String spotifyAlbumId){
+    public PostRequestDTO(Integer rating, String reviewBodyText, Long userId, AlbumRequestDTO album){
         this.rating = rating;
         this.reviewBodyText = reviewBodyText;
         this.userId = userId;
-        this.spotifyAlbumId = spotifyAlbumId;
+        this.album = album;
     }
 
     public PostRequestDTO(){}
@@ -39,11 +39,7 @@ public class PostRequestDTO {
         this.userId = userId;
     }
 
-    public String getSpotifyAlbumId() {
-        return spotifyAlbumId;
-    }
+    public AlbumRequestDTO getAlbum() { return album; }
 
-    public void setSpotifyAlbumId(String spotifyAlbumId) {
-        this.spotifyAlbumId = spotifyAlbumId;
-    }
+    public void setAlbum(AlbumRequestDTO album) { this.album = album; }
 }

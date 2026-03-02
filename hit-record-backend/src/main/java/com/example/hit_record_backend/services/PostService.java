@@ -1,5 +1,6 @@
 package com.example.hit_record_backend.services;
 
+import com.example.hit_record_backend.dto.request.AlbumRequestDTO;
 import com.example.hit_record_backend.dto.request.PostRequestDTO;
 import com.example.hit_record_backend.dto.request.PostUpdateDTO;
 import com.example.hit_record_backend.dto.response.AlbumResponseDTO;
@@ -7,6 +8,7 @@ import com.example.hit_record_backend.dto.response.PostResponseDTO;
 import com.example.hit_record_backend.models.Album;
 import com.example.hit_record_backend.models.Post;
 import com.example.hit_record_backend.models.User;
+import com.example.hit_record_backend.repositories.AlbumRepository;
 import com.example.hit_record_backend.repositories.PostRepository;
 import com.example.hit_record_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class PostService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AlbumRepository albumRepository;
+
 
     public List<PostResponseDTO> getAllPosts() {
 
@@ -40,9 +45,9 @@ public class PostService {
         return responseList;
     }
 
-    // Converts post entity to DTO
+    // Converts post entity to DTO for GET and POST methods
     private PostResponseDTO mapToDTO(Post post) {
-        // Gets album from database associated with post entity
+        // Gets album associated with post entity
         Album album = post.getAlbum();
         // Converts album into DTO structure
         AlbumResponseDTO albumDTO = new AlbumResponseDTO(
@@ -72,17 +77,40 @@ public class PostService {
 
     // Portion that handles post creation
     public PostResponseDTO createPost(PostRequestDTO request) {
-        // Validates user id exists in database
+        // Validates that the user exists
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        //Creates new post and sets values from PostRequestDTO
+
+        // Created null album entity to be set from request
+        Album album = null;
+        // Uses spotify album ID to check if the album exists in DB
+        if (request.getAlbum() != null && request.getAlbum().getSpotifyAlbumId() != null) {
+            album = albumRepository.findBySpotifyAlbumId(request.getAlbum().getSpotifyAlbumId())
+                    .orElseGet(() -> {
+                        // Creates new entity if album doesn't exist
+                        Album newAlbum = new Album();
+                        AlbumRequestDTO albumDTO = request.getAlbum();
+                        newAlbum.setTitle(albumDTO.getTitle());
+                        newAlbum.setArtist(albumDTO.getArtist());
+                        newAlbum.setYearReleased(albumDTO.getYearReleased());
+                        newAlbum.setNumberOfTracks(albumDTO.getNumberOfTracks());
+                        newAlbum.setSpotifyAlbumId(albumDTO.getSpotifyAlbumId());
+                        return albumRepository.save(newAlbum);
+                    });
+        } else {
+            throw new RuntimeException("Album data is required");
+        }
+
+        // Create the post entity
         Post post = new Post();
         post.setRating(request.getRating());
         post.setReviewBodyText(request.getReviewBodyText());
         post.setUser(user);
-        // Saves post to repository
+        post.setAlbum(album);
+
         Post savedPost = postRepository.save(post);
-        // Converts post entity to DTO
+
+        // Converts post entity to PostResponseDTO
         return mapToDTO(savedPost);
     }
 
