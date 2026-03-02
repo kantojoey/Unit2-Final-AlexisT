@@ -1,10 +1,12 @@
 package com.example.hit_record_backend.controllers;
 
-import com.example.hit_record_backend.models.Album;
-import com.example.hit_record_backend.models.Post;
-import com.example.hit_record_backend.models.User;
-import com.example.hit_record_backend.repositories.PostRepository;
-import com.example.hit_record_backend.repositories.UserRepository;
+import com.example.hit_record_backend.dto.request.PostRequestDTO;
+import com.example.hit_record_backend.dto.request.PostUpdateDTO;
+import com.example.hit_record_backend.dto.response.PostResponseDTO;
+import com.example.hit_record_backend.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,43 +14,39 @@ import java.util.List;
 @RestController
 @RequestMapping("/posts")
 public class PostController {
-    private final PostRepository postRepository;
 
-    private final UserRepository userRepository;
+    @Autowired
+    private PostService postService;
 
-    public PostController(PostRepository postRepository, UserRepository userRepository){
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
-    }
-
+    // Get all posts from user
     @GetMapping
-    public List<Post> getAllPosts(){
-        return postRepository.findAll();
+    public ResponseEntity<List<PostResponseDTO>> getAllPosts(){
+        return ResponseEntity.ok(postService.getAllPosts());
     }
 
+    // Get a post by the post id
     @GetMapping("/{id}")
-    public Post getPostById(@PathVariable Long id){
-        return postRepository.findById(id).orElse(null);
+    public ResponseEntity<PostResponseDTO> getPostById(@PathVariable Long id){
+        return ResponseEntity.ok(postService.getPostById(id));
     }
 
-//    @PostMapping
-//    public Post createPost(@RequestBody Post post){
-//        // Fetch managed user
-//        User postUser = userRepository.findById(post.getUser().getId())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//        post.setUser(postUser);
-//
-//        // Ensure album is attached
-//        Album album = post.getAlbum();
-//        if (album == null) throw new RuntimeException("Album is required");
-//        album.setPost(post);  // set owning side for JPA
-//
-//        // Save post (cascades album)
-//        return postRepository.save(post);
-//    }
+    // Creates post
+    @PostMapping
+    public ResponseEntity<PostResponseDTO> createPost(@RequestBody PostRequestDTO submission){
+        return ResponseEntity.status(HttpStatus.CREATED).body(postService.createPost(submission));
+    }
 
+    // Updates post
+    @PutMapping("/{id}")
+    public ResponseEntity<PostResponseDTO> updatePost(@PathVariable Long id, @RequestBody PostUpdateDTO updatedPost){
+        return ResponseEntity.ok(postService.updatePost(id, updatedPost));
+    }
+
+    // Deletes post
     @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable Long id){
-        postRepository.deleteById(id);
+    public ResponseEntity<Void> deletePost(@PathVariable Long id){
+        postService.deletePost(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
 }
