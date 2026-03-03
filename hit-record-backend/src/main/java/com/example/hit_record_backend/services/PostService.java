@@ -12,7 +12,9 @@ import com.example.hit_record_backend.repositories.AlbumRepository;
 import com.example.hit_record_backend.repositories.PostRepository;
 import com.example.hit_record_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -131,7 +133,7 @@ public class PostService {
     // Portion that handles post deletions
     public void deletePost(Long id){
         if(!postRepository.existsById(id)){
-            throw new RuntimeException("Post not found!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found!");
         }
         postRepository.deleteById(id);
     }

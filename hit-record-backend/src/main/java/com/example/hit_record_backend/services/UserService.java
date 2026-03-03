@@ -7,10 +7,6 @@ import com.example.hit_record_backend.models.User;
 import com.example.hit_record_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -67,22 +63,33 @@ public class UserService {
         );
     }
 
-    // User Login
-    @PostMapping("/login")
+    // Portion that logs in user
     public UserResponseDTO loginRequest(UserLoginDTO loginInfo) {
-
+        // VERIFIES USER EXISTS OR THROWS EXCEPTION
         Optional<User> userLogin = userRepository.findByUsername(loginInfo.getUsername().trim());
 
         if(userLogin.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That user doesn't exist!");
         }
-
+        // .GET() RETURNS ENTIRE FOUND USER OBJECT AND STORES IT IN acceptedUser
         User acceptedUser = userLogin.get();
 
         if(!acceptedUser.getPassword().equals((loginInfo.getPassword()))) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Your password is incorrect!");
         }
 
-        return ResponseEntity.ok(new UserResponseDTO(acceptedUser.getId(), acceptedUser.getFirstName(), acceptedUser.getLastName(), acceptedUser.getUsername()));
+        return new UserResponseDTO(
+                acceptedUser.getId(),
+                acceptedUser.getFirstName(),
+                acceptedUser.getLastName(),
+                acceptedUser.getUsername());
+    }
+
+    // Portion that deletes user
+    public void deleteUser(Long id){
+        if(!userRepository.existsById(id)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
+        }
+        userRepository.deleteById(id);
     }
 }
