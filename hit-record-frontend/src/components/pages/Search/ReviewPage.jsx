@@ -36,7 +36,7 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
         };
 
         try{
-            const response = await fetch("http://localhost:8080/api/reviews", albumPostParams);
+            const response = await fetch("http://localhost:8080/posts", albumPostParams);
             
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);
