@@ -7,14 +7,42 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
 
     let navigate = useNavigate();
 
-    const saveAlbumReview = () => {
+    const saveAlbumReview = async () => {
+
+        const userId =1; // Placeholder for user ID, replace with actual user ID when available
 
         if (!rating || !reviewText.trim()) {
             return;
         };
 
+        const responseBody = {
+            rating: rating.length,
+            reviewBodyText: reviewText,
+            userId,
+            album: {
+                title: reviewedAlbum.name,
+                artist: reviewedAlbum.artists[0].name,
+                yearReleased: parseInt(reviewedAlbum.release_date.slice(0,4)),
+                numberOfTracks: reviewedAlbum.total_tracks,
+                spotifyAlbumId: reviewedAlbum.id
+            }
 
-        const newReview = {
+        };
+
+        let albumPostParams = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(responseBody)
+        };
+
+        try{
+            const response = await fetch("http://localhost:8080/posts", albumPostParams);
+            
+            if(!response.ok){
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+                    
+            const newReview = {
             albumId: reviewedAlbum.id,
             image: reviewedAlbum.images[0].url,
             albumName: reviewedAlbum.name,
@@ -23,14 +51,18 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
             tracks: reviewedAlbum.total_tracks,
             rating,
             reviewText,
+            };
+
+
+            setAlbumReviews(prevReviews => [newReview, ...prevReviews]);
+            navigate("/search");
+            setRating("");
+            setReviewText("");
+            setReviewedAlbum(null);
+        }
+        catch(error){
+            console.error("Failed to post review:", error);
         };
-
-
-        setAlbumReviews(prevReviews => [newReview, ...prevReviews]);
-        navigate("/search");
-        setRating("");
-        setReviewText("");
-        setReviewedAlbum(null);
     };
 
     const cancelAlbumReview = () => {
