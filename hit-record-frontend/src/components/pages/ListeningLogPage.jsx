@@ -43,7 +43,7 @@ const ListeningLogPage = ({ albumReviews, setExpandedAlbum }) => {
                 {albumReviews && albumReviews.length > 0 ? (albumReviews.map((album) => {
                     return (
                         <Card className="album-card" onClick={() => albumDetailExpander(album)}>
-                            <img src={album.image} alt={album.albumName} title={album.albumName} className="album-artwork"></img>
+                            <img src={album.image} alt={album.title} title={album.title} className="album-artwork"></img>
                         </Card>
                     )
                 })) :

@@ -18,14 +18,14 @@ const ExpandedDetailsPage = ({ expandedAlbum }) => {
                     </span>
                     <div className="expanded-album-details-page">
                         <Card className="album-card">
-                            <img src={expandedAlbum.image} alt={expandedAlbum.albumName} title={expandedAlbum.albumName} className="album-artwork" style={{ cursor: "auto" }}></img>
+                            <img src={expandedAlbum.image} alt={expandedAlbum.title} title={expandedAlbum.title} className="album-artwork" style={{ cursor: "auto" }}></img>
                         </Card>
                         <h2><span className="data-category">Rating:</span> {expandedAlbum.rating}</h2>
                     </div>
                     <div className="expanded-album-review-content">
                         <Card className="key-album-data">
                             <Card className="album-datapoint-card">
-                                <h3 className="data-heading"><span className="data-category">Title:</span> {expandedAlbum.albumName}</h3>
+                                <h3 className="data-heading"><span className="data-category">Title:</span> {expandedAlbum.title}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
                                 <h3 className="data-heading"><span className="data-category">Artist:</span> {expandedAlbum.artistName}</h3>
