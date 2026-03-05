@@ -49,7 +49,7 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
             title: reviewedAlbum.name,
             artist: reviewedAlbum.artists[0].name,
             yearReleased: reviewedAlbum.release_date.slice(0, 4),
-            tracks: reviewedAlbum.total_tracks,
+            numberOfTracks: reviewedAlbum.total_tracks,
             rating,
             reviewText,
             };
