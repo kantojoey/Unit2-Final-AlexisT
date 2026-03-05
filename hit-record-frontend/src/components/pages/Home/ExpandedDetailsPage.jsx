@@ -1,13 +1,49 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Card from "../../common/Card";
 import Button from "../../common/Button";
 
-const ExpandedDetailsPage = ({ expandedAlbum }) => {
+const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
+
+    let navigate = useNavigate();
+
+    //     const editPost = async () => {
+    // // Logic
+
+    //     };
+
+    const deletePost = async () => {
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this post? This cannot be undone.");
+
+        if (!confirmDelete) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/posts/${expandedAlbum.id}`, { method: "DELETE" })
+
+            if (!response.ok) {
+                throw new Error(`Delete failed!: ${response.status}`);
+            }
+
+            // Logic to delete from front end
+            setAlbumReviews(prev =>
+                prev.filter(review => review.id !== expandedAlbum.id)
+            );
+
+            navigate("/listening-log");
+
+        } catch (error) {
+            console.error("Failed to delete review:", error);
+        };
+    }
+
+
     return (
         <main>
             {expandedAlbum ? (
                 <>
-                    <span style={{display:"flex", flexDirection:"row", gap:"10px"}}>
+                    <span style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
 
                         <Link to="/home" style={{ color: "white" }}>
                             <h3 style={{ textDecoration: "underline" }}>Home</h3>
@@ -46,7 +82,7 @@ const ExpandedDetailsPage = ({ expandedAlbum }) => {
                         </Card>
                     </div>
                     <div className="edit-post-options">
-                        <Button className="delete-post-button">
+                        <Button className="delete-post-button" onClick={deletePost}>
                             Delete
                         </Button>
                         <Button className="edit-post-button">
