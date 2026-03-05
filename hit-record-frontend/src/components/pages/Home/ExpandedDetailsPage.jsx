@@ -28,10 +28,10 @@ const ExpandedDetailsPage = ({ expandedAlbum }) => {
                                 <h3 className="data-heading"><span className="data-category">Title:</span> {expandedAlbum.title}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading"><span className="data-category">Artist:</span> {expandedAlbum.artistName}</h3>
+                                <h3 className="data-heading"><span className="data-category">Artist:</span> {expandedAlbum.artist}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading"><span className="data-category">Year:</span> {expandedAlbum.year}</h3>
+                                <h3 className="data-heading"><span className="data-category">Year:</span> {expandedAlbum.yearReleased}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
                                 <h3 className="data-heading">{expandedAlbum.tracks} <span className="data-category">tracks</span></h3>
