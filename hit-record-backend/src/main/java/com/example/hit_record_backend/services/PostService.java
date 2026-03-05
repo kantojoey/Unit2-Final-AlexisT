@@ -63,7 +63,7 @@ public class PostService {
         return new PostResponseDTO(
                 post.getId(),
                 post.getRating(),
-                post.getReviewBodyText(),
+                post.getReviewText(),
                 post.getCreatedAt(),
                 post.getEditedAt(),
                 albumDTO
@@ -106,7 +106,7 @@ public class PostService {
         // Create the post entity
         Post post = new Post();
         post.setRating(request.getRating());
-        post.setReviewBodyText(request.getReviewBodyText());
+        post.setReviewText(request.getReviewText());
         post.setUser(user);
         post.setAlbum(album);
 
@@ -122,7 +122,7 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         // Update fields from PostUpdateDTO
         post.setRating(updateRequest.getRating());
-        post.setReviewBodyText(updateRequest.getReviewBodyText());
+        post.setReviewText(updateRequest.getReviewText());
         post.setEditedAt(LocalDateTime.now());
         // Save to postRepository
         Post updatedPost = postRepository.save(post);

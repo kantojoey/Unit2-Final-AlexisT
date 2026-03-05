@@ -5,15 +5,15 @@ import java.time.LocalDateTime;
 public class PostResponseDTO {
     private Long id;
     private Integer rating;
-    private String reviewBodyText;
+    private String reviewText;
     private LocalDateTime createdAt;
     private LocalDateTime editedAt;
     private AlbumResponseDTO album;
 
-    public PostResponseDTO(Long id, Integer rating, String reviewBodyText, LocalDateTime createdAt, LocalDateTime editedAt, AlbumResponseDTO album) {
+    public PostResponseDTO(Long id, Integer rating, String reviewText, LocalDateTime createdAt, LocalDateTime editedAt, AlbumResponseDTO album) {
         this.id = id;
         this.rating = rating;
-        this.reviewBodyText = reviewBodyText;
+        this.reviewText = reviewText;
         this.createdAt = createdAt;
         this.editedAt = editedAt;
         this.album = album;
@@ -37,12 +37,12 @@ public class PostResponseDTO {
         this.rating = rating;
     }
 
-    public String getReviewBodyText() {
-        return reviewBodyText;
+    public String getReviewText() {
+        return reviewText;
     }
 
-    public void setReviewBodyText(String reviewBodyText) {
-        this.reviewBodyText = reviewBodyText;
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -53,9 +53,7 @@ public class PostResponseDTO {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getEditedAt() {
-        return editedAt;
-    }
+    public LocalDateTime getEditedAt() { return editedAt; }
 
     public void setEditedAt(LocalDateTime editedAt) {
         this.editedAt = editedAt;

@@ -2,13 +2,13 @@ package com.example.hit_record_backend.dto.request;
 
 public class PostRequestDTO {
     private Integer rating;
-    private String reviewBodyText;
+    private String reviewText;
     private Long userId;
     private AlbumRequestDTO album;
 
-    public PostRequestDTO(Integer rating, String reviewBodyText, Long userId, AlbumRequestDTO album){
+    public PostRequestDTO(Integer rating, String reviewText, Long userId, AlbumRequestDTO album){
         this.rating = rating;
-        this.reviewBodyText = reviewBodyText;
+        this.reviewText = reviewText;
         this.userId = userId;
         this.album = album;
     }
@@ -23,12 +23,10 @@ public class PostRequestDTO {
         this.rating = rating;
     }
 
-    public String getReviewBodyText() {
-        return reviewBodyText;
-    }
+    public String getReviewText() { return reviewText; }
 
-    public void setReviewBodyText(String reviewBodyText) {
-        this.reviewBodyText = reviewBodyText;
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 
     public Long getUserId() {

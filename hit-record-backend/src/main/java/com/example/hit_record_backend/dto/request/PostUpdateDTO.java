@@ -2,7 +2,7 @@ package com.example.hit_record_backend.dto.request;
 
 public class PostUpdateDTO {
     private Integer rating;
-    private String reviewBodyText;
+    private String reviewText;
 
     public PostUpdateDTO(){}
 
@@ -14,11 +14,11 @@ public class PostUpdateDTO {
         this.rating = rating;
     }
 
-    public String getReviewBodyText() {
-        return reviewBodyText;
+    public String getReviewText() {
+        return reviewText;
     }
 
-    public void setReviewBodyText(String reviewBodyText) {
-        this.reviewBodyText = reviewBodyText;
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 }
