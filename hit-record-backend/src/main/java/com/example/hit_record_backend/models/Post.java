@@ -19,7 +19,7 @@ public class Post {
     private Integer rating;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String reviewBodyText;
+    private String reviewText;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -39,10 +39,10 @@ public class Post {
     private Album album;
 
     // Constructors
-    public Post(Long id, Integer rating, String reviewBodyText, LocalDateTime createdAt){
+    public Post(Long id, Integer rating, String reviewText, LocalDateTime createdAt){
         this.id = id;
         this.rating = rating;
-        this.reviewBodyText = reviewBodyText;
+        this.reviewText = reviewText;
         this.createdAt = createdAt;
     }
 
@@ -67,12 +67,12 @@ public class Post {
         this.rating = rating;
     }
 
-    public String getReviewBodyText() {
-        return reviewBodyText;
+    public String getReviewText() {
+        return reviewText;
     }
 
-    public void setReviewBodyText(String reviewBodyText) {
-        this.reviewBodyText = reviewBodyText;
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 
     public LocalDateTime getCreatedAt() {

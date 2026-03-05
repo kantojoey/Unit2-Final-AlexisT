@@ -17,7 +17,7 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
 
         const responseBody = {
             rating: rating.length,
-            reviewBodyText: reviewText,
+            reviewText,
             userId,
             album: {
                 title: reviewedAlbum.name,
@@ -37,15 +37,16 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
 
         try{
             const response = await fetch("http://localhost:8080/posts", albumPostParams);
+            console.log("Posting review:", JSON.stringify(responseBody, null, 2));
             
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
                     
             const newReview = {
-            albumId: reviewedAlbum.id,
+            spotifyAlbumId: reviewedAlbum.id,
             image: reviewedAlbum.images[0].url,
-            albumName: reviewedAlbum.name,
+            title: reviewedAlbum.name,
             artistName: reviewedAlbum.artists[0].name,
             year: reviewedAlbum.release_date.slice(0, 4),
             tracks: reviewedAlbum.total_tracks,

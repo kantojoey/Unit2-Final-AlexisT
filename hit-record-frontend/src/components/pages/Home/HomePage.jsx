@@ -37,7 +37,7 @@ const HomePage = ({ albumReviews, setExpandedAlbum, favorites }) => {
                 {albumReviews && albumReviews.length > 0 ? (albumReviews.slice(0, 8).map((album) => {
                     return (
                         <Card className="album-card" onClick={() => albumDetailExpander(album)}>
-                            <img src={album.image} className="album-artwork" alt={album.albumName} title={album.albumName}></img>
+                            <img src={album.image} className="album-artwork" alt={album.title} title={album.title}></img>
                         </Card>
                     )
                 })) :
