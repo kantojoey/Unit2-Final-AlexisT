@@ -42,17 +42,25 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
+
+            const savedPost = await response.json();
                     
             const newReview = {
-            spotifyAlbumId: reviewedAlbum.id,
-            image: reviewedAlbum.images[0].url,
-            title: reviewedAlbum.name,
-            artist: reviewedAlbum.artists[0].name,
-            yearReleased: reviewedAlbum.release_date.slice(0, 4),
-            numberOfTracks: reviewedAlbum.total_tracks,
-            rating,
-            reviewText,
-            };
+                ...savedPost,
+                image: reviewedAlbum.images[0].url,
+                // Overrides response body rating with star version for display purposes
+                rating
+            }
+            // const newReview = {
+            // spotifyAlbumId: reviewedAlbum.id,
+            // image: reviewedAlbum.images[0].url,
+            // title: reviewedAlbum.name,
+            // artist: reviewedAlbum.artists[0].name,
+            // yearReleased: reviewedAlbum.release_date.slice(0, 4),
+            // numberOfTracks: reviewedAlbum.total_tracks,
+            // rating,
+            // reviewText,
+            // };
 
 
             setAlbumReviews(prevReviews => [newReview, ...prevReviews]);
