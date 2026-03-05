@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import Card from "../../common/Card";
+import Button from "../../common/Button";
 
 const ExpandedDetailsPage = ({ expandedAlbum }) => {
     return (
@@ -43,6 +44,14 @@ const ExpandedDetailsPage = ({ expandedAlbum }) => {
                                 {expandedAlbum.reviewText}
                             </p>
                         </Card>
+                    </div>
+                    <div className="edit-post-options">
+                        <Button className="delete-post-button">
+                            Delete
+                        </Button>
+                        <Button className="edit-post-button">
+                            Edit
+                        </Button>
                     </div>
                 </>
             ) : (
