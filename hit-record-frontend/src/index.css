@@ -18,12 +18,23 @@ body {
     max-height: 150vh;
 }
 
+/* main {
+    flex: 1;
+    background: linear-gradient(to bottom, #3b0764, #581c87, #6b21a8, #000000);
+    width: 100%;
+    color: white;
+    padding: 1rem;
+} */
+
 main {
     flex: 1;
     background: linear-gradient(to bottom, #3b0764, #581c87, #6b21a8, #000000);
     width: 100%;
     color: white;
     padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .loading-page-main-div {
@@ -149,6 +160,13 @@ main {
     text-decoration-line: underline;
     text-decoration-color: rgb(192 132 252);
     text-decoration-thickness: 0.15rem;
+}
+
+.edit-post-options {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    justify-content: flex-start;
 }
 
 .recently-listened-shelf {
@@ -305,7 +323,7 @@ main {
     width: 45vw;
 }
 
-.submit-options input[type="submit"] {
+.submit-options input[type="submit"], .edit-post-button {
     background-color: #6b21a8;
     border: 0.1rem solid rgb(192 132 252);
     width: 8rem;
@@ -316,19 +334,20 @@ main {
     color: white;
 }
 
-.submit-options input[type="submit"]:hover {
+.submit-options input[type="submit"]:hover, .edit-post-button:hover {
     background-color: rgb(192 132 252);
 }
 
-.submit-options button {
+.submit-options button, .delete-post-button {
     width: 8rem;
     height: 45px;
     border: 0.1rem solid black;
     font-size: 1rem;
+    color: black;
     background-color: rgb(206, 206, 206);
 }
 
-.submit-options button:hover {
+.submit-options button:hover, .delete-post-button:hover {
     background-color: rgb(250, 56, 56);
 }
 
