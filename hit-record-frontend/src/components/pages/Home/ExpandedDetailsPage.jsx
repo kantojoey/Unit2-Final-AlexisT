@@ -18,23 +18,23 @@ const ExpandedDetailsPage = ({ expandedAlbum }) => {
                     </span>
                     <div className="expanded-album-details-page">
                         <Card className="album-card">
-                            <img src={expandedAlbum.image} alt={expandedAlbum.title} title={expandedAlbum.title} className="album-artwork" style={{ cursor: "auto" }}></img>
+                            <img src={expandedAlbum.image} alt={expandedAlbum.album.title} title={expandedAlbum.album.title} className="album-artwork" style={{ cursor: "auto" }}></img>
                         </Card>
                         <h2><span className="data-category">Rating:</span> {expandedAlbum.rating}</h2>
                     </div>
                     <div className="expanded-album-review-content">
                         <Card className="key-album-data">
                             <Card className="album-datapoint-card">
-                                <h3 className="data-heading"><span className="data-category">Title:</span> {expandedAlbum.title}</h3>
+                                <h3 className="data-heading"><span className="data-category">Title:</span> {expandedAlbum.album.title}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading"><span className="data-category">Artist:</span> {expandedAlbum.artist}</h3>
+                                <h3 className="data-heading"><span className="data-category">Artist:</span> {expandedAlbum.album.artist}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading"><span className="data-category">Year:</span> {expandedAlbum.yearReleased}</h3>
+                                <h3 className="data-heading"><span className="data-category">Year:</span> {expandedAlbum.album.yearReleased}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading">{expandedAlbum.numberOfTracks} <span className="data-category">tracks</span></h3>
+                                <h3 className="data-heading">{expandedAlbum.album.numberOfTracks} <span className="data-category">tracks</span></h3>
                             </Card>
                         </Card>
                         <Card className="user-review-card">
