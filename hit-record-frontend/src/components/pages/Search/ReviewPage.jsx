@@ -138,11 +138,11 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
                                         required
                                     />
                                     <div className="submit-options">
-                                        <input
-                                            type="submit" value="Submit" />
-                                        <Button onClick={cancelAlbumReview}>
+                                        <Button type = "button" onClick={cancelAlbumReview}>
                                             Cancel
                                         </Button>
+                                        <input
+                                            type="submit" value="Submit" />
                                     </div>
                                 </div>
                             </form>
