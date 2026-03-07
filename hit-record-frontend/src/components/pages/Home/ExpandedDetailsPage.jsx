@@ -6,10 +6,13 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
 
     let navigate = useNavigate();
 
-    //     const editPost = async () => {
-    // // Logic
+        const editPost = () => {
 
-    //     };
+            // Passes in the postID generated in backend
+            // Passes state of the full album review object to "post" and sends to review page
+            navigate(`/search/review/${expandedAlbum.id}`, {state: {post: expandedAlbum} });
+
+        };
 
     const deletePost = async () => {
 
@@ -27,6 +30,7 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
             }
 
             // Logic to delete from front end
+            // Filters out the matching post ID from URL parameter
             setAlbumReviews(prev =>
                 prev.filter(review => review.id !== expandedAlbum.id)
             );
@@ -85,7 +89,7 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
                         <Button className="delete-post-button" onClick={deletePost}>
                             Delete
                         </Button>
-                        <Button className="edit-post-button">
+                        <Button className="edit-post-button" onClick={editPost}>
                             Edit
                         </Button>
                     </div>
