@@ -3,15 +3,7 @@ import Card from "../../common/Card";
 import Button from "../../common/Button";
 import { useEffect, useRef } from "react";
 
-const ReviewPage = ({
-    reviewedAlbum,
-    setReviewedAlbum,
-    setAlbumReviews,
-    rating,
-    setRating,
-    reviewText,
-    setReviewText
-}) => {
+const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, setRating, reviewText, setReviewText }) => {
 
     const navigate = useNavigate();
     // postID from url parameter
@@ -103,8 +95,8 @@ const ReviewPage = ({
                 image: album.image,
                 rating
             };
-            
-            console.log(`Successfully ${method === "PUT" ? "updated" : "posted"} review:`,JSON.stringify(newReview, null, 2));
+
+            console.log(`Successfully ${method === "PUT" ? "updated" : "posted"} review:`, JSON.stringify(newReview, null, 2));
 
             setAlbumReviews(prevReviews => {
                 if (isEditing) {
@@ -202,3 +194,5 @@ const ReviewPage = ({
         </main>
     );
 };
+
+export default ReviewPage;
