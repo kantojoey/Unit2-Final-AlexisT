@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import AlbumShelf from "../common/AlbumShelf";
 import Card from "../common/Card";
 
-const ListeningLogPage = ({ albumReviews, setExpandedAlbum }) => {
+const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview }) => {
 
     const calculateAvg = (reviews) => {
 
@@ -15,7 +15,7 @@ const ListeningLogPage = ({ albumReviews, setExpandedAlbum }) => {
     let navigate = useNavigate();
 
     const albumDetailExpander = (album) => {
-        setExpandedAlbum(album);
+        setexpandedAlbumReview(album);
         navigate("/home/details");
     };
 

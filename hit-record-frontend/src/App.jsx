@@ -32,7 +32,7 @@ function App() {
   const [reviewText, setReviewText] = useState("");
 
   // Album expanded details page setter
-  const [expandedAlbum, setExpandedAlbum] = useState(null);
+  const [expandedAlbumReview, setexpandedAlbumReview] = useState(null);
 
   // API access token
   const [accessToken, setAccessToken] = useState();
@@ -63,9 +63,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<LoadingPage />} />
-        <Route path="/home" element={<HomePage albumReviews={albumReviews} setExpandedAlbum={setExpandedAlbum} favorites={favorites}/>} />
-        <Route path="/home/details" element={<ExpandedDetailsPage expandedAlbum={expandedAlbum} setAlbumReviews={setAlbumReviews}/>} />
-        <Route path="/listening-log" element={<ListeningLogPage albumReviews={albumReviews} setExpandedAlbum={setExpandedAlbum}/>} />
+        <Route path="/home" element={<HomePage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} favorites={favorites}/>} />
+        <Route path="/home/details" element={<ExpandedDetailsPage expandedAlbumReview={expandedAlbumReview} setAlbumReviews={setAlbumReviews}/>} />
+        <Route path="/listening-log" element={<ListeningLogPage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview}/>} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/search" element={<SearchPage accessToken={accessToken} setReviewedAlbum={setReviewedAlbum} />}/>
         <Route path="/search/review" element={<ReviewPage reviewedAlbum={reviewedAlbum} setReviewedAlbum={setReviewedAlbum} setAlbumReviews={setAlbumReviews} rating={rating} setRating={setRating} reviewText={reviewText} setReviewText={setReviewText}/>} />

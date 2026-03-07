@@ -3,12 +3,12 @@ import AlbumShelf from "../../common/AlbumShelf";
 import Card from "../../common/Card";
 import VinylRecord from "../../images/VinylRecord.png"
 
-const HomePage = ({ albumReviews, setExpandedAlbum, favorites }) => {
+const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
 
     let navigate = useNavigate();
 
     const albumDetailExpander = (album) => {
-        setExpandedAlbum(album);
+        setexpandedAlbumReview(album);
         navigate("/home/details");
 
     };
