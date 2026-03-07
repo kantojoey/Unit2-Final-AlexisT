@@ -69,6 +69,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/search" element={<SearchPage accessToken={accessToken} setReviewedAlbum={setReviewedAlbum} />}/>
         <Route path="/search/review" element={<ReviewPage reviewedAlbum={reviewedAlbum} setReviewedAlbum={setReviewedAlbum} setAlbumReviews={setAlbumReviews} rating={rating} setRating={setRating} reviewText={reviewText} setReviewText={setReviewText}/>} />
+        <Route path="/search/review/:postId" element={<ReviewPage reviewedAlbum={reviewedAlbum} setReviewedAlbum={setReviewedAlbum} setAlbumReviews={setAlbumReviews} rating={rating} setRating={setRating} reviewText={reviewText} setReviewText={setReviewText}/>}/>
         <Route path="/profile" element={<ProfilePage albumReviews={albumReviews} favorites={favorites} setFavorites={setFavorites} accessToken={accessToken} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
