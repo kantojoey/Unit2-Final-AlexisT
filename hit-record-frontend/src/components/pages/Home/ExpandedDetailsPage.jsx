@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import Card from "../../common/Card";
 import Button from "../../common/Button";
 
-const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
+const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
 
     let navigate = useNavigate();
 
@@ -10,7 +10,7 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
 
             // Passes in the postID generated in backend
             // Passes state of the full album review object to "post" and sends to review page
-            navigate(`/search/review/${expandedAlbum.id}`, {state: {post: expandedAlbum} });
+            navigate(`/search/review/${expandedAlbumReview.id}`, {state: {post: expandedAlbumReview} });
 
         };
 
@@ -23,7 +23,7 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8080/posts/${expandedAlbum.id}`, { method: "DELETE" })
+            const response = await fetch(`http://localhost:8080/posts/${expandedAlbumReview.id}`, { method: "DELETE" })
 
             if (!response.ok) {
                 throw new Error(`Delete failed!: ${response.status}`);
@@ -32,7 +32,7 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
             // Logic to delete from front end
             // Filters out the matching post ID from URL parameter
             setAlbumReviews(prev =>
-                prev.filter(review => review.id !== expandedAlbum.id)
+                prev.filter(review => review.id !== expandedAlbumReview.id)
             );
 
             navigate("/listening-log");
@@ -45,7 +45,7 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
 
     return (
         <main>
-            {expandedAlbum ? (
+            {expandedAlbumReview ? (
                 <>
                     <span style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
 
@@ -59,29 +59,29 @@ const ExpandedDetailsPage = ({ expandedAlbum, setAlbumReviews }) => {
                     </span>
                     <div className="expanded-album-details-page">
                         <Card className="album-card">
-                            <img src={expandedAlbum.image} alt={expandedAlbum.album.title} title={expandedAlbum.album.title} className="album-artwork" style={{ cursor: "auto" }}></img>
+                            <img src={expandedAlbumReview.image} alt={expandedAlbumReview.album.title} title={expandedAlbumReview.album.title} className="album-artwork" style={{ cursor: "auto" }}></img>
                         </Card>
-                        <h2><span className="data-category">Rating:</span> {expandedAlbum.rating}</h2>
+                        <h2><span className="data-category">Rating:</span> {expandedAlbumReview.rating}</h2>
                     </div>
                     <div className="expanded-album-review-content">
                         <Card className="key-album-data">
                             <Card className="album-datapoint-card">
-                                <h3 className="data-heading"><span className="data-category">Title:</span> {expandedAlbum.album.title}</h3>
+                                <h3 className="data-heading"><span className="data-category">Title:</span> {expandedAlbumReview.album.title}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading"><span className="data-category">Artist:</span> {expandedAlbum.album.artist}</h3>
+                                <h3 className="data-heading"><span className="data-category">Artist:</span> {expandedAlbumReview.album.artist}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading"><span className="data-category">Year:</span> {expandedAlbum.album.yearReleased}</h3>
+                                <h3 className="data-heading"><span className="data-category">Year:</span> {expandedAlbumReview.album.yearReleased}</h3>
                             </Card>
                             <Card className="album-datapoint-card ">
-                                <h3 className="data-heading">{expandedAlbum.album.numberOfTracks} <span className="data-category">tracks</span></h3>
+                                <h3 className="data-heading">{expandedAlbumReview.album.numberOfTracks} <span className="data-category">tracks</span></h3>
                             </Card>
                         </Card>
                         <Card className="user-review-card">
                             <h3 className="data-category">My Review:</h3>
                             <p>
-                                {expandedAlbum.reviewText}
+                                {expandedAlbumReview.reviewText}
                             </p>
                         </Card>
                     </div>
