@@ -2,9 +2,11 @@ import { Link, useLocation, useNavigate, useParams } from "react-router";
 import Card from "../../common/Card";
 import Button from "../../common/Button";
 import { useEffect, useRef } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, setRating, reviewText, setReviewText }) => {
 
+    const {authUser} = useAuth();
     const navigate = useNavigate();
     // postID from url parameter
     const { postId } = useParams();
@@ -57,7 +59,8 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
     }, []);
 
     const saveAlbumReview = async () => {
-        const userId = 1; // placeholder until user login is set up
+        // const userId = 1; // placeholder until user login is set up
+    
 
         if (!rating || !reviewText.trim()) return;
 
@@ -65,7 +68,7 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
         const responseBody = {
             rating: rating.length,
             reviewText,
-            userId,
+            userId: authUser.id,
             album: {
                 title: album.title,
                 artist: album.artist,
