@@ -5,23 +5,28 @@
     justify-content: space-around;
     align-items: center;
     padding: 0.5rem 0;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
 }
 
-.nav-item {
+ .nav-item {
     font-size: 3rem;
     color: rgb(156 163 175);
     padding: 0.75rem;
     border-radius: 0.75rem;
+    cursor: pointer;
 }
 
 .nav-item:hover {
     color: rgb(192 132 252);
-    background-color: rgb(168, 85, 247, 0.2);
+    background-color: rgba(168, 85, 247, 0.2);
 }
 
 .nav-item.active {
     color: rgb(192 132 252);
-    background-color: rgb(168, 85, 247, 0.2);
+    background-color: rgba(168, 85, 247, 0.2);
 }
 
 .record-icon {
@@ -32,27 +37,51 @@
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-left: 20px;
-    padding-right: 20px;
     gap: 0.5rem;
-    color: white;
-
 }
 
 .header-text {
-    padding-top: 5px;
     font-size: 3rem;
+    margin: 0;
 }
 
-header,
-footer {
+ header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    padding: 20px 20px;
+    height: 80px;
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
     width: 100%;
+    box-sizing: border-box;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+    width: 100%;
+    height: 60px;
+}
+
+.logout-section {
+    display: flex;
+    flex-direction: column; /* icon above text */
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.logout-section p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.sign-out-icon {
+    font-size: 2rem;
 }
 
 .album-shelf-default-styles {
@@ -92,8 +121,7 @@ footer {
 
 @media screen and (max-width: 1024px) {
 
-    .header-content {
-        flex-direction: row;
+      .header-content {
         gap: 0.25rem;
     }
 
@@ -125,8 +153,8 @@ footer {
 @media screen and (max-width: 768px) {
 
     header {
-        flex-direction: column;
-        padding: 0.5rem;
+        flex-direction: row;
+        padding: 0.5rem 1rem;
     }
 
     .header-content {
@@ -149,9 +177,6 @@ footer {
     }
 
     .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
         flex-wrap: wrap;
         justify-content: space-evenly;
         padding: 0.25rem;
@@ -195,9 +220,8 @@ footer {
         font-size: 1.7rem;
     }
 
-    .header-text {
+     .header-text {
         font-size: 1.2rem;
-        text-align: center;
     }
 
     .button-default-styles {
