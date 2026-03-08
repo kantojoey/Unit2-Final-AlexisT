@@ -1,20 +1,24 @@
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import VinylRecord from "../images/VinylRecord.png"
-import Button from "../common/Button";
+// import LogInForm from "../userInformation/LogInForm";
+// import SignUpForm from "../userInformation/SignUpForm";
+// import Button from "../common/Button";
 
 const LoadingPage = () => {
 
-    let navigate = useNavigate();
-    const handleClick = () => {
-        navigate("/home");
+    // let navigate = useNavigate();
+    // const handleClick = () => {
+    //     navigate("/home");
 
-    };
+    // };
     
     return (
         <main>
             <div className="loading-page-main-div">
                 <img src={VinylRecord} alt="Spinning vinyl record stock image" title="Spinning vinyl record stock image" className="spin"></img>
-                <Button onClick={handleClick} className="start-button">Start</Button>
+                {/* <Button onClick={handleClick} className="start-button">Start</Button> */}
+                {/* <SignUpForm/>
+                <LogInForm/> */}
             </div>
         </main>
     );

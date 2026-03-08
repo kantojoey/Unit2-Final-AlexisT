@@ -62,7 +62,7 @@ function App() {
     <div id="body-container">
       <Header />
       <Routes>
-        <Route path="/" element={<LoadingPage />} />
+        <Route path="/" element={<LoadingPage/>} />
         <Route path="/home" element={<HomePage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} favorites={favorites}/>} />
         <Route path="/home/details" element={<ExpandedDetailsPage expandedAlbumReview={expandedAlbumReview} setAlbumReviews={setAlbumReviews}/>} />
         <Route path="/listening-log" element={<ListeningLogPage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} setAlbumReviews={setAlbumReviews}/>} />
