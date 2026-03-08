@@ -19,9 +19,9 @@ public class PostController {
     private PostService postService;
 
     // Get all posts from user
-    @GetMapping
-    public ResponseEntity<List<PostResponseDTO>> getAllPosts(){
-        return ResponseEntity.ok(postService.getAllPosts());
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<PostResponseDTO>> getAllPosts(@PathVariable Long userId){
+        return ResponseEntity.ok(postService.getAllPosts(userId));
     }
 
     // Get a post by the post id

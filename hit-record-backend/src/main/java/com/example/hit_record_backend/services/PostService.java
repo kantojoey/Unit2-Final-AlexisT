@@ -33,10 +33,10 @@ public class PostService {
     private AlbumRepository albumRepository;
 
 
-    public List<PostResponseDTO> getAllPosts() {
+    public List<PostResponseDTO> getAllPosts(Long userId) {
 
         // Gets all post entities
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postRepository.findByUserId(userId);
         // Creates new list of Post DTOs
         List<PostResponseDTO> responseList = new ArrayList<>();
         // Converts each post entity into a post DTO
