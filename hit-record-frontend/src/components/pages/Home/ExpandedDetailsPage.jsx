@@ -6,13 +6,17 @@ const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
 
     let navigate = useNavigate();
 
-        const editPost = () => {
+    const editPost = () => {
 
-            // Passes in the postID generated in backend
-            // Passes state of the full album review object to "post" and sends to review page
-            navigate(`/search/review/${expandedAlbumReview.id}`, {state: {post: expandedAlbumReview} });
+        // Passes in the postID generated in backend
+        // Passes state of the full album review object to "post" and sends to review page
+        navigate(`/search/review/${expandedAlbumReview.id}`, { state: { post: expandedAlbumReview } });
 
-        };
+    };
+
+    const renderStars = () => {
+        return "★".repeat(expandedAlbumReview.rating);
+    }
 
     const deletePost = async () => {
 
@@ -59,9 +63,9 @@ const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
                     </span>
                     <div className="expanded-album-details-page">
                         <Card className="album-card">
-                            <img src={expandedAlbumReview.image} alt={expandedAlbumReview.album.title} title={expandedAlbumReview.album.title} className="album-artwork" style={{ cursor: "auto" }}></img>
+                            <img src={expandedAlbumReview.album.imageUrl} alt={expandedAlbumReview.album.title} title={expandedAlbumReview.album.title} className="album-artwork" style={{ cursor: "auto" }}></img>
                         </Card>
-                        <h2><span className="data-category">Rating:</span> {expandedAlbumReview.rating}</h2>
+                        <h2><span className="data-category">Rating:</span> {renderStars()}</h2>
                     </div>
                     <div className="expanded-album-review-content">
                         <Card className="key-album-data">

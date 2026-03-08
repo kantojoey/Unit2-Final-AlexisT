@@ -1,18 +1,49 @@
 import { useNavigate } from "react-router";
 import AlbumShelf from "../common/AlbumShelf";
 import Card from "../common/Card";
+import { useAuth } from "../contexts/AuthContext";
+import { useEffect } from "react";
 
 const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReviews }) => {
 
+    let navigate = useNavigate();
+
+    const { authUser } = useAuth();
+
+    useEffect(() => {
+
+        const fetchUserReviews = async () => {
+
+            if (!authUser) {
+                return;
+            }
+
+            let fetchParams = {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            }
+
+            const response = await fetch(`http://localhost:8080/posts/user/${authUser.id}`, fetchParams);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const fetchedAlbumReviews = await response.json();
+
+            setAlbumReviews(fetchedAlbumReviews.reverse());
+
+        }
+
+        fetchUserReviews();
+
+    }, [authUser]);
+
     const calculateAvg = (reviews) => {
 
-        let sum = reviews.reduce((accumulator, review) => accumulator + review.rating.length, 0);
+        let sum = reviews.reduce((accumulator, review) => accumulator + review.rating, 0);
 
         let avg = (sum / reviews.length).toFixed(1);
         return avg;
     };
 
-    let navigate = useNavigate();
 
     const albumDetailExpander = (album) => {
         setexpandedAlbumReview(album);
@@ -25,31 +56,31 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
 
         const sorted = [...albumReviews];
 
-        switch(option) {
+        switch (option) {
 
-        case "artistAscending":
-            sorted.sort((a,b) => a.album.artist.localeCompare(b.album.artist));
-            break;
-        case "artistDescending":
-            sorted.sort((a,b) => b.album.artist.localeCompare(a.album.artist));
-            break;
-        case "albumAscending":
-            sorted.sort((a,b) => a.album.title.localeCompare(b.album.title)); 
-            break;  
-        case "albumDescending":
-            sorted.sort((a,b) => b.album.title.localeCompare(a.album.title)); 
-            break;  
-        case "highToLow":
-            sorted.sort((a,b) => b.rating.length - a.rating.length);
-            break;
-        case "lowToHigh":
-            sorted.sort((a,b) => a.rating.length - b.rating.length);
-            break;
-        case "newestFirst":
-            sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            break;
-        case "oldestFirst":
-            sorted.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt));
+            case "artistAscending":
+                sorted.sort((a, b) => a.album.artist.localeCompare(b.album.artist));
+                break;
+            case "artistDescending":
+                sorted.sort((a, b) => b.album.artist.localeCompare(a.album.artist));
+                break;
+            case "albumAscending":
+                sorted.sort((a, b) => a.album.title.localeCompare(b.album.title));
+                break;
+            case "albumDescending":
+                sorted.sort((a, b) => b.album.title.localeCompare(a.album.title));
+                break;
+            case "highToLow":
+                sorted.sort((a, b) => b.rating.length - a.rating.length);
+                break;
+            case "lowToHigh":
+                sorted.sort((a, b) => a.rating.length - b.rating.length);
+                break;
+            case "newestFirst":
+                sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                break;
+            case "oldestFirst":
+                sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
         }
 
         setAlbumReviews(sorted);
@@ -87,15 +118,15 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
                 <option value="highToLow">Rating (High - Low)</option>
                 <option value="lowToHigh">Rating(Low-High)</option>
                 <option value="artistAscending">Artist (A-Z)</option>
-                <option value="artistDescending">Artizt (Z-A)</option>
+                <option value="artistDescending">Artist (Z-A)</option>
                 <option value="albumAscending">Title (A-Z)</option>
                 <option value="albumDescending">Title (Z-A)</option>
             </select>
             <AlbumShelf>
-                {albumReviews && albumReviews.length > 0 ? (albumReviews.map((album) => {
+                {albumReviews && albumReviews.length > 0 ? (albumReviews.map((post) => {
                     return (
-                        <Card key={album.id} className="album-card" onClick={() => albumDetailExpander(album)}>
-                            <img src={album.image} alt={album.title} title={album.title} className="album-artwork"></img>
+                        <Card key={post.id} className="album-card" onClick={() => albumDetailExpander(post)}>
+                            <img src={post.album.imageUrl} alt={post.album.title} title={post.album.title} className="album-artwork"></img>
                         </Card>
                     )
                 })) :
