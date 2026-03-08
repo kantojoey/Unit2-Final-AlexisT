@@ -5,6 +5,7 @@ import com.example.hit_record_backend.dto.request.PostRequestDTO;
 import com.example.hit_record_backend.dto.request.PostUpdateDTO;
 import com.example.hit_record_backend.dto.response.AlbumResponseDTO;
 import com.example.hit_record_backend.dto.response.PostResponseDTO;
+import com.example.hit_record_backend.dto.response.UserSummaryDTO;
 import com.example.hit_record_backend.models.Album;
 import com.example.hit_record_backend.models.Post;
 import com.example.hit_record_backend.models.User;
@@ -59,6 +60,13 @@ public class PostService {
                 album.getNumberOfTracks(),
                 album.getSpotifyAlbumId()
         );
+
+        // Converts user into summary DTO structure
+        User user = post.getUser(); // get the associated user entity
+        UserSummaryDTO userSummaryDTO = new UserSummaryDTO(
+                user.getId(),
+                user.getUsername()
+        );
         // Builds final post DTO
         return new PostResponseDTO(
                 post.getId(),
@@ -66,7 +74,8 @@ public class PostService {
                 post.getReviewText(),
                 post.getCreatedAt(),
                 post.getEditedAt(),
-                albumDTO
+                albumDTO,
+                userSummaryDTO
         );
     }
 

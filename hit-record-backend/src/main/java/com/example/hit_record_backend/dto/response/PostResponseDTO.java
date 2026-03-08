@@ -9,14 +9,16 @@ public class PostResponseDTO {
     private LocalDateTime createdAt;
     private LocalDateTime editedAt;
     private AlbumResponseDTO album;
+    private UserSummaryDTO user;
 
-    public PostResponseDTO(Long id, Integer rating, String reviewText, LocalDateTime createdAt, LocalDateTime editedAt, AlbumResponseDTO album) {
+    public PostResponseDTO(Long id, Integer rating, String reviewText, LocalDateTime createdAt, LocalDateTime editedAt, AlbumResponseDTO album, UserSummaryDTO user) {
         this.id = id;
         this.rating = rating;
         this.reviewText = reviewText;
         this.createdAt = createdAt;
         this.editedAt = editedAt;
         this.album = album;
+        this.user = user;
     }
 
     public PostResponseDTO() {}
@@ -66,4 +68,8 @@ public class PostResponseDTO {
     public void setAlbum(AlbumResponseDTO album) {
         this.album = album;
     }
+
+    public UserSummaryDTO getUser() { return user; }
+
+    public void setUser(UserSummaryDTO user) { this.user = user; }
 }
