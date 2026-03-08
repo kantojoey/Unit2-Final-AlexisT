@@ -67,12 +67,38 @@ main {
     box-shadow: 1rem 1rem 10rem rgb(168, 85, 247);
 }
 
+.user-validation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-row label {
+    width: 120px;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.user-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
 .album-card {
     border: none;
     cursor: pointer;
 }
 
-.album-card-no-pointer{
+.album-card-no-pointer {
     border: none;
     cursor: default;
 }
@@ -150,7 +176,7 @@ main {
 .listening-stats-table th,
 .listening-stats-table td {
     padding: 0.6rem 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     text-align: left;
     font-size: 1.2rem;
 }
@@ -323,7 +349,8 @@ main {
     width: 45vw;
 }
 
-.submit-options input[type="submit"], .edit-post-button {
+.submit-options input[type="submit"],
+.edit-post-button {
     background-color: #6b21a8;
     border: 0.1rem solid rgb(192 132 252);
     width: 8rem;
@@ -334,11 +361,13 @@ main {
     color: white;
 }
 
-.submit-options input[type="submit"]:hover, .edit-post-button:hover {
+.submit-options input[type="submit"]:hover,
+.edit-post-button:hover {
     background-color: rgb(192 132 252);
 }
 
-.submit-options button, .delete-post-button {
+.submit-options button,
+.delete-post-button {
     width: 8rem;
     height: 45px;
     border: 0.1rem solid black;
@@ -347,7 +376,8 @@ main {
     background-color: rgb(206, 206, 206);
 }
 
-.submit-options button:hover, .delete-post-button:hover {
+.submit-options button:hover,
+.delete-post-button:hover {
     background-color: rgb(250, 56, 56);
 }
 
