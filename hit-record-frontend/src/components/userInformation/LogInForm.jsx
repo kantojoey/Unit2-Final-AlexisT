@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
 const LogInForm = () => {
 
@@ -10,6 +11,8 @@ const LogInForm = () => {
     });
 
     const [validationError, setValidationError] = useState("");
+
+    const {setAuthUser, setIsLoggedIn} = useAuth();
 
     const navigate = useNavigate();
 
@@ -49,12 +52,16 @@ const LogInForm = () => {
             const newUser = await response.json();
             console.log("Successfully signed in user:", newUser);
 
+
+            setAuthUser(newUser);
+            setIsLoggedIn(true);
             navigate("/home");
 
         } catch (error) {
             console.error("Signup failed: Incorrect username or password", error);
         }
     }
+
     return (
         <form className="user-validation-form" onSubmit={logInUser}>
             <h1>Log In:</h1>

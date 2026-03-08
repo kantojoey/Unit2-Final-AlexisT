@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
 
 const SignUpForm = () => {
@@ -13,6 +14,8 @@ const SignUpForm = () => {
     });
 
     const [signInError, setSignInError] = useState("");
+
+    const { setAuthUser, setIsLoggedIn } = useAuth();
 
     const navigate = useNavigate();
 
@@ -53,6 +56,8 @@ const SignUpForm = () => {
             const newUser = await response.json();
             console.log("New user registered:", newUser);
 
+            setAuthUser(newUser);
+            setIsLoggedIn(true);
             navigate("/home");
 
         } catch (error) {

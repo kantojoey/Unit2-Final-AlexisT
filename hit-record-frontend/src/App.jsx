@@ -12,6 +12,7 @@ import BottomNavBar from './components/common/BottomNavBar'
 import Footer from './components/common/Footer'
 import { useEffect, useState } from 'react'
 import ReviewPage from './components/pages/Search/ReviewPage'
+import ProtectedRoute from './components/pages/ProtectedRoute'
 
 
 // API User ID and Key for access
@@ -62,20 +63,43 @@ function App() {
     <div id="body-container">
       <Header />
       <Routes>
-        <Route path="/" element={<LoadingPage/>} />
-        <Route path="/home" element={<HomePage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} favorites={favorites}/>} />
-        <Route path="/home/details" element={<ExpandedDetailsPage expandedAlbumReview={expandedAlbumReview} setAlbumReviews={setAlbumReviews}/>} />
-        <Route path="/listening-log" element={<ListeningLogPage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} setAlbumReviews={setAlbumReviews}/>} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/search" element={<SearchPage accessToken={accessToken} setReviewedAlbum={setReviewedAlbum} />}/>
-        <Route path="/search/review" element={<ReviewPage reviewedAlbum={reviewedAlbum} setReviewedAlbum={setReviewedAlbum} setAlbumReviews={setAlbumReviews} rating={rating} setRating={setRating} reviewText={reviewText} setReviewText={setReviewText}/>} />
-        <Route path="/search/review/:postId" element={<ReviewPage reviewedAlbum={reviewedAlbum} setReviewedAlbum={setReviewedAlbum} setAlbumReviews={setAlbumReviews} rating={rating} setRating={setRating} reviewText={reviewText} setReviewText={setReviewText}/>}/>
-        <Route path="/profile" element={<ProfilePage albumReviews={albumReviews} favorites={favorites} setFavorites={setFavorites} accessToken={accessToken} />} />
+        <Route path="/" element={<LoadingPage />} />
+        <Route path="/home" element={
+          <ProtectedRoute>
+            <HomePage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} favorites={favorites} />
+          </ProtectedRoute>} />
+        <Route path="/home/details" element={
+          <ProtectedRoute>
+            <ExpandedDetailsPage expandedAlbumReview={expandedAlbumReview} setAlbumReviews={setAlbumReviews} />
+          </ProtectedRoute>} />
+        <Route path="/listening-log" element={
+          <ProtectedRoute>
+            <ListeningLogPage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} setAlbumReviews={setAlbumReviews} />
+          </ProtectedRoute>} />
+        <Route path="/about" element={
+          <ProtectedRoute>
+            <AboutPage />
+          </ProtectedRoute>} />
+        <Route path="/search" element={
+          <ProtectedRoute>
+            <SearchPage accessToken={accessToken} setReviewedAlbum={setReviewedAlbum} />
+          </ProtectedRoute>} />
+        <Route path="/search/review" element={
+          <ProtectedRoute>
+            <ReviewPage reviewedAlbum={reviewedAlbum} setReviewedAlbum={setReviewedAlbum} setAlbumReviews={setAlbumReviews} rating={rating} setRating={setRating} reviewText={reviewText} setReviewText={setReviewText} />
+          </ProtectedRoute>} />
+        <Route path="/search/review/:postId" element={
+          <ProtectedRoute>
+            <ReviewPage reviewedAlbum={reviewedAlbum} setReviewedAlbum={setReviewedAlbum} setAlbumReviews={setAlbumReviews} rating={rating} setRating={setRating} reviewText={reviewText} setReviewText={setReviewText} />
+          </ProtectedRoute>} />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <ProfilePage albumReviews={albumReviews} favorites={favorites} setFavorites={setFavorites} accessToken={accessToken} />
+          </ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <BottomNavBar />
       <Footer />
-
     </div>
   )
 }
