@@ -6,13 +6,15 @@ public class AlbumRequestDTO {
     private Integer yearReleased;
     private Integer numberOfTracks;
     private String spotifyAlbumId;
+    private String imageUrl;
 
-    public AlbumRequestDTO(String title, String artist, Integer yearReleased, Integer numberOfTracks, String spotifyAlbumId) {
+    public AlbumRequestDTO(String title, String artist, Integer yearReleased, Integer numberOfTracks, String spotifyAlbumId, String imageUrl) {
         this.title = title;
         this.artist = artist;
         this.yearReleased = yearReleased;
         this.numberOfTracks = numberOfTracks;
         this.spotifyAlbumId = spotifyAlbumId;
+        this.imageUrl = imageUrl;
     }
 
     public AlbumRequestDTO(){}
@@ -55,5 +57,13 @@ public class AlbumRequestDTO {
 
     public void setSpotifyAlbumId(String spotifyAlbumId) {
         this.spotifyAlbumId = spotifyAlbumId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

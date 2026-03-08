@@ -28,18 +28,22 @@ public class Album {
     @Column(nullable = false)
     private Integer numberOfTracks;
 
+    @Column(nullable = false)
+    private String imageURL;
+
     // Relationship with Posts
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
     // Constructors
-    public Album(Long id, String spotifyAlbumId,String title, String artist, Integer yearReleased, Integer numberOfTracks){
+    public Album(Long id, String spotifyAlbumId,String title, String artist, Integer yearReleased, Integer numberOfTracks, String imageURL){
         this.id = id;
         this.spotifyAlbumId = spotifyAlbumId;
         this.title = title;
         this.artist = artist;
         this.yearReleased = yearReleased;
         this.numberOfTracks = numberOfTracks;
+        this.imageURL = imageURL;
     }
 
     public Album(){}
@@ -101,4 +105,8 @@ public class Album {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+    public String getImageURL() { return imageURL; }
+
+    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 }

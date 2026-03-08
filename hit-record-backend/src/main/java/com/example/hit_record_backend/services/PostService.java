@@ -58,7 +58,8 @@ public class PostService {
                 album.getArtist(),
                 album.getYearReleased(),
                 album.getNumberOfTracks(),
-                album.getSpotifyAlbumId()
+                album.getSpotifyAlbumId(),
+                album.getImageURL()
         );
 
         // Converts user into summary DTO structure
@@ -106,6 +107,7 @@ public class PostService {
                         newAlbum.setYearReleased(albumDTO.getYearReleased());
                         newAlbum.setNumberOfTracks(albumDTO.getNumberOfTracks());
                         newAlbum.setSpotifyAlbumId(albumDTO.getSpotifyAlbumId());
+                        newAlbum.setImageURL(albumDTO.getImageUrl());
                         return albumRepository.save(newAlbum);
                     });
         } else {
