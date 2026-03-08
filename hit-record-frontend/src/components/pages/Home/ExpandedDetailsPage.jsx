@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import Card from "../../common/Card";
 import Button from "../../common/Button";
+import VinylRecord from "../../images/VinylRecord.png"
 
 const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
 
@@ -63,7 +64,7 @@ const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
                     </span>
                     <div className="expanded-album-details-page">
                         <Card className="album-card">
-                            <img src={expandedAlbumReview.album.imageUrl} alt={expandedAlbumReview.album.title} title={expandedAlbumReview.album.title} className="album-artwork" style={{ cursor: "auto" }}></img>
+                            <img src={expandedAlbumReview.album.imageUrl || VinylRecord} alt={expandedAlbumReview.album.title} title={expandedAlbumReview.album.title} className="album-artwork" style={{ cursor: "auto" }}></img>
                         </Card>
                         <h2><span className="data-category">Rating:</span> {renderStars()}</h2>
                     </div>

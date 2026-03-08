@@ -37,10 +37,10 @@ const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
                 <h1>Recently Listened →</h1>
             </Link>
             <AlbumShelf>
-                {albumReviews && albumReviews.length > 0 ? (albumReviews.slice(0, 8).map((album) => {
+                {albumReviews && albumReviews.length > 0 ? (albumReviews.slice(0, 8).map((post) => {
                     return (
-                        <Card key={album.id} className="album-card" onClick={() => albumDetailExpander(album)}>
-                            <img src={album.image} className="album-artwork" alt={album.title} title={album.title}></img>
+                        <Card key={post.id} className="album-card" onClick={() => albumDetailExpander(post)}>
+                            <img src={post.album.imageUrl || VinylRecord} className="album-artwork" alt={post.album.title} title={post.album.title}></img>
                         </Card>
                     )
                 })) :

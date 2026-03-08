@@ -3,6 +3,7 @@ import AlbumShelf from "../common/AlbumShelf";
 import Card from "../common/Card";
 import { useAuth } from "../contexts/AuthContext";
 import { useEffect } from "react";
+import VinylRecord from "../images/VinylRecord.png"
 
 const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReviews }) => {
 
@@ -126,7 +127,7 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
                 {albumReviews && albumReviews.length > 0 ? (albumReviews.map((post) => {
                     return (
                         <Card key={post.id} className="album-card" onClick={() => albumDetailExpander(post)}>
-                            <img src={post.album.imageUrl} alt={post.album.title} title={post.album.title} className="album-artwork"></img>
+                            <img src={post.album.imageUrl || VinylRecord} alt={post.album.title} title={post.album.title} className="album-artwork"></img>
                         </Card>
                     )
                 })) :
