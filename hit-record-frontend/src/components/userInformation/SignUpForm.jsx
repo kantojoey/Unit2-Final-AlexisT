@@ -71,6 +71,7 @@ const SignUpForm = () => {
                     id="firstName"
                     name="firstName"
                     onChange={handleChange}
+                    required
                 />
             </div>
 
@@ -81,6 +82,7 @@ const SignUpForm = () => {
                     id="lastName"
                     name="lastName"
                     onChange={handleChange}
+                    required
                 />
             </div>
 
@@ -91,6 +93,7 @@ const SignUpForm = () => {
                     id="username"
                     name="username"
                     onChange={handleChange}
+                    required
                 />
             </div>
 
@@ -101,14 +104,15 @@ const SignUpForm = () => {
                     id="password"
                     name="password"
                     onChange={handleChange}
+                    required
                 />
             </div>
 
-            {signInError && <p style={{ color: "red"}}>{signInError}</p>}
+            {signInError && <p style={{ color: "red" }}>{signInError}</p>}
 
             <div className="user-buttons">
-                <input type="reset" value="Clear Form" onClick={handleReset} />
-                <input type="submit" value="Sign up"/>
+                <input className="validation-button" type="reset" value="Clear" onClick={handleReset} />
+                <input className="validation-button" type="submit" value="Register" />
             </div>
         </form>
     );
