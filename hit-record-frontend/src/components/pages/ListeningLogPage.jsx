@@ -6,7 +6,7 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
 
     const calculateAvg = (reviews) => {
 
-        let sum = reviews.reduce((accumulator, reviews) => accumulator + reviews.rating.length, 0);
+        let sum = reviews.reduce((accumulator, review) => accumulator + review.rating.length, 0);
 
         let avg = (sum / reviews.length).toFixed(1);
         return avg;

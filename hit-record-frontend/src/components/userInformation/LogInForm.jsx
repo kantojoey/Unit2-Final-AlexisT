@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
 const LogInForm = () => {
 
@@ -10,6 +11,8 @@ const LogInForm = () => {
     });
 
     const [validationError, setValidationError] = useState("");
+
+    const {setAuthUser, setIsLoggedIn} = useAuth();
 
     const navigate = useNavigate();
 
@@ -49,29 +52,45 @@ const LogInForm = () => {
             const newUser = await response.json();
             console.log("Successfully signed in user:", newUser);
 
+
+            setAuthUser(newUser);
+            setIsLoggedIn(true);
             navigate("/home");
 
         } catch (error) {
             console.error("Signup failed: Incorrect username or password", error);
         }
     }
+
     return (
         <form className="user-validation-form" onSubmit={logInUser}>
             <h1>Log In:</h1>
             <div className="form-row">
                 <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" onChange={handleChange} />
+                <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                onChange={handleChange} 
+                placeholder="Username..."
+                required/>
             </div>
 
             <div className="form-row">
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" onChange={handleChange} />
+                <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                onChange={handleChange} 
+                placeholder="Enter password..."
+                required/>
             </div>
             {validationError && <p style={{ color: "red"}}>{validationError}</p>}
 
             <div className="user-buttons">
-                <input type="reset" value="Clear Form" onClick={handleReset} />
-                <input type="submit" value="Log in"/>
+                <input className="validation-button" type="reset" value="Clear" onClick={handleReset} />
+                <input className="validation-button" type="submit" value="Log in"/>
             </div>
         </form>
     );

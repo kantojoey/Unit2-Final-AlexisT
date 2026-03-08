@@ -93,6 +93,25 @@ main {
     gap: 15px;
 }
 
+.loading-button {
+    height: 4rem;
+    width: 8rem;
+    background-color: #6b21a8;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 30%;
+}
+
+.validation-button {
+    height: 2rem;
+    width: 4.5rem;
+    background-color: #6b21a8;
+    color: white;
+    font-size: 1rem;
+    border-radius: 30%;
+}
+
 .album-card {
     border: none;
     cursor: pointer;

@@ -1,26 +1,25 @@
-// import { useNavigate } from "react-router";
+import { useState } from "react";
 import VinylRecord from "../images/VinylRecord.png"
-// import LogInForm from "../userInformation/LogInForm";
-// import SignUpForm from "../userInformation/SignUpForm";
-// import Button from "../common/Button";
+import LogInForm from "../userInformation/LogInForm";
+import SignUpForm from "../userInformation/SignUpForm";
 
 const LoadingPage = () => {
 
-    // let navigate = useNavigate();
-    // const handleClick = () => {
-    //     navigate("/home");
+    const [formType, setFormType] = useState(null);
 
-    // };
-    
     return (
         <main>
             <div className="loading-page-main-div">
                 <img src={VinylRecord} alt="Spinning vinyl record stock image" title="Spinning vinyl record stock image" className="spin"></img>
-                {/* <Button onClick={handleClick} className="start-button">Start</Button> */}
-                {/* <SignUpForm/>
-                <LogInForm/> */}
+                <div className="user-buttons">
+                    <button className="loading-button" onClick={() => setFormType("login")}>Log In</button>
+                    <button className="loading-button" onClick={() => setFormType("signup")}>Sign Up</button>
+                </div>
+                {formType === "login" && <LogInForm />}
+                {formType === "signup" && <SignUpForm />}
             </div>
         </main>
+
     );
 };
 
