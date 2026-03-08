@@ -59,13 +59,11 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
     }, []);
 
     const saveAlbumReview = async () => {
-        // const userId = 1; // placeholder until user login is set up
-    
 
         if (!rating || !reviewText.trim()) return;
 
         // Sent to backend
-        const responseBody = {
+        const requestBody = {
             rating: rating.length,
             reviewText,
             userId: authUser.id,
@@ -81,13 +79,13 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
         const albumPostParams = {
             method,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(responseBody)
+            body: JSON.stringify(requestBody)
         };
 
         try {
             const response = await fetch(url, albumPostParams);
             // null is the replacer function to edit the included content, 2 is the spacer (makes the JSON more readable by adding 2 spaces)
-            console.log(`${method === "PUT" ? "Updating" : "Posting"} review:`, JSON.stringify(responseBody, null, 2));
+            console.log(`${method === "PUT" ? "Updating" : "Posting"} review:`, JSON.stringify(requestBody, null, 2));
 
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
