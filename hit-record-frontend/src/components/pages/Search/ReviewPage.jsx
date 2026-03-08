@@ -39,7 +39,7 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
                 title: postToEdit.album.title,
                 artist: postToEdit.album.artist,
                 year: postToEdit.album.yearReleased,
-                image: postToEdit.image,
+                image: postToEdit.album.imageUrl,
                 totalTracks: postToEdit.album.numberOfTracks,
                 spotifyId: postToEdit.album.spotifyAlbumId
             }
@@ -72,7 +72,8 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
                 artist: album.artist,
                 yearReleased: parseInt(album.year),
                 numberOfTracks: album.totalTracks,
-                spotifyAlbumId: album.spotifyId
+                spotifyAlbumId: album.spotifyId,
+                imageUrl: album.image
             }
         };
 
@@ -93,7 +94,6 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
 
             const newReview = {
                 ...savedPost,
-                image: album.image,
                 rating
             };
 
