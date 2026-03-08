@@ -2,8 +2,11 @@ import { Link, useNavigate } from "react-router";
 import AlbumShelf from "../../common/AlbumShelf";
 import Card from "../../common/Card";
 import VinylRecord from "../../images/VinylRecord.png"
+import { useAuth } from "../../contexts/AuthContext";
 
 const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
+
+    const {authUser} = useAuth();
 
     let navigate = useNavigate();
 
@@ -15,7 +18,7 @@ const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
     
     return (
         <main>
-            <p><i>Welcome to your music homepage! Let's get listening.</i></p>
+            <p><i>Welcome to your music homepage, {authUser.username}! Let's get listening.</i></p>
             <Link to="/profile" style={{ color: "white" }}>
                 <h1><strong>My Favorites at a glance</strong></h1>
             </Link>

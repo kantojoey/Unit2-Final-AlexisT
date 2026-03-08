@@ -1,16 +1,18 @@
 import { useState } from "react";
 import Card from "../common/Card";
 import VinylRecord from "../images/VinylRecord.png";
-import ProfilePic from "../images/ProfilePic.jpg"
+import ProfilePic from "../images/jiggly.jpg"
 import AlbumShelf from "../common/AlbumShelf";
 import SearchBox from "../common/SearchBox";
 import Button from "../common/Button";
+import { useAuth } from "../contexts/AuthContext";
 
 const ProfilePage = ({ albumReviews, favorites, setFavorites, accessToken }) => {
 
     let [searchInput, setSearchInput] = useState("");
     const [albums, setAlbums] = useState([]);
     const [error, setError] = useState("");
+    const {authUser} = useAuth();
 
     let emptyIndex = favorites.findIndex((index) => index === null);
 
@@ -41,7 +43,7 @@ const ProfilePage = ({ albumReviews, favorites, setFavorites, accessToken }) => 
     return (
         <main>
             <div className="user-profile-info">
-                <h2 style={{ textAlign: "center" }}><strong>My Profile</strong></h2>
+                <h2 style={{ textAlign: "center" }}><strong>{authUser.username.toUpperCase()}</strong></h2>
                 <div className="profile-pic-div">
                     <img className="profile-pic" src={ProfilePic} />
                     <Card className="profile-stat">
