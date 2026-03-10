@@ -9,34 +9,6 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
 
     let navigate = useNavigate();
 
-    // const { authUser } = useAuth();
-
-    // useEffect(() => {
-
-    //     const fetchUserReviews = async () => {
-
-    //         if (!authUser) {
-    //             return;
-    //         }
-
-    //         let fetchParams = {
-    //             method: "GET",
-    //             headers: { "Content-Type": "application/json" }
-    //         }
-
-    //         const response = await fetch(`http://localhost:8080/posts/user/${authUser.id}`, fetchParams);
-    //         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-    //         const fetchedAlbumReviews = await response.json();
-
-    //         setAlbumReviews(fetchedAlbumReviews.reverse());
-
-    //     }
-
-    //     fetchUserReviews();
-
-    // }, [authUser, setAlbumReviews]);
-
     const calculateAvg = (reviews) => {
 
         let sum = reviews.reduce((accumulator, review) => accumulator + review.rating, 0);
