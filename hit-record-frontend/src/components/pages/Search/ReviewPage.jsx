@@ -92,9 +92,12 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
 
             const savedPost = await response.json();
 
+            const numericRating = rating ? rating.length : 0;
+
+
             const newReview = {
                 ...savedPost,
-                rating
+                rating: numericRating
             };
 
             console.log(`Successfully ${method === "PUT" ? "updated" : "posted"} review:`, JSON.stringify(newReview, null, 2));
@@ -108,7 +111,7 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
                     return [newReview, ...prevReviews];
                 }
             });
-            navigate("/search");
+            navigate("/listening-log");
             setRating("");
             setReviewText("");
             setReviewedAlbum(null);
