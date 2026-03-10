@@ -13,6 +13,7 @@ import Footer from './components/common/Footer'
 import { useEffect, useState } from 'react'
 import ReviewPage from './components/pages/Search/ReviewPage'
 import ProtectedRoute from './components/pages/ProtectedRoute'
+import { useAuth } from './components/contexts/AuthContext'
 
 
 // API User ID and Key for access
@@ -41,6 +42,10 @@ function App() {
   // Favorite Album Array
   const [favorites, setFavorites] = useState([null, null, null, null]);
 
+  // Gets the logged in user to fetch favorites
+  const { authUser } = useAuth();
+
+  // Gets API access token by posting key
   useEffect(() => {
     let authCredentials = {
       method: "POST",
@@ -58,6 +63,71 @@ function App() {
       }
       );
   }, []);
+
+  // Fetches favorite albums on sign in
+  useEffect(() => {
+
+    const fetchFavorites = async () => {
+
+      if (!authUser) {
+        return;
+      }
+
+      let fetchParams = {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      }
+
+      try {
+
+        const response = await fetch(`http://localhost:8080/favorites/user/${authUser.id}`, fetchParams);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const fetchedAlbumReviews = await response.json();
+
+        const limitedFourFavorites = [...fetchedAlbumReviews];
+
+        while (limitedFourFavorites.length < 4) {
+          limitedFourFavorites.push(null);
+        }
+
+        setFavorites(limitedFourFavorites);
+      } catch (error) {
+        console.error("Failed to fetch favorite albums,", error);
+      }
+
+    }
+
+    fetchFavorites();
+
+  }, [authUser]);
+
+  // Fetches stored reviews on login
+      useEffect(() => {
+
+        const fetchUserReviews = async () => {
+
+            if (!authUser) {
+                return;
+            }
+
+            let fetchParams = {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            }
+
+            const response = await fetch(`http://localhost:8080/posts/user/${authUser.id}`, fetchParams);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const fetchedAlbumReviews = await response.json();
+
+            setAlbumReviews(fetchedAlbumReviews.reverse());
+
+        }
+
+        fetchUserReviews();
+
+    }, [authUser]);
 
   return (
     <div id="body-container">

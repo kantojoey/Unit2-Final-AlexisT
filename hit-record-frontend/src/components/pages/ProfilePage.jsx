@@ -12,31 +12,73 @@ const ProfilePage = ({ albumReviews, favorites, setFavorites, accessToken }) => 
     let [searchInput, setSearchInput] = useState("");
     const [albums, setAlbums] = useState([]);
     const [error, setError] = useState("");
-    const {authUser} = useAuth();
+    const { authUser } = useAuth();
 
     let emptyIndex = favorites.findIndex((index) => index === null);
 
-    const handleAddFavorite = (favorite) => {
+    const handleAddFavorite = async (favorite) => {
 
-        if (favorites.includes(favorite)) {
-            setError("This album already exists in your favorites!");
-            return;
-        };
+
+        for (let i = 0; i < favorites.length; i++) {
+            const albumAtIndex = favorites[i];
+
+            if (albumAtIndex && albumAtIndex.spotifyAlbumId === favorite.id) {
+                setError("This album already exists in your favorites!");
+                return;
+            }
+        }
 
         if (emptyIndex === -1) {
             setError("Your favorites shelf is full! Please remove an album before adding a new selection.");
             return;
         };
+        const requestBody = {
+            spotifyAlbumId: favorite.id,
+            title: favorite.name,
+            artist: favorite.artists[0].name,
+            imageUrl: favorite.images[0].url
+        }
 
-        setError("");
-        let newFavorites = [...favorites];
-        newFavorites[emptyIndex] = favorite;
-        setFavorites(newFavorites);
+        const postParams = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody, null, 2)
+        }
+        try {
+            const response = await fetch(`http://localhost:8080/favorites/user/${authUser.id}`, postParams);
+
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const addedAlbum = await response.json();
+
+
+            setError("");
+            let newFavorites = [...favorites];
+            newFavorites[emptyIndex] = addedAlbum;
+            setFavorites(newFavorites);
+            console.log("Successfully added new album:", JSON.stringify(addedAlbum, null, 2));
+
+        } catch (error) {
+            console.error("Error adding album, try again later:", error);
+            setError("Error adding album, try again later.");
+
+        }
+
     };
 
-    const handleRemoveFavorite = (favorite) => {
+    const handleRemoveFavorite = async (index) => {
         let newFavorites = [...favorites];
-        newFavorites[favorite] = null;
+
+        try {
+            const response = await fetch(`http://localhost:8080/favorites/user/${authUser.id}/${favorites[index].id}`, { method: "DELETE" });
+
+            if (!response.ok) throw new Error(`Failed to delete album: ${response.status}`);
+        } catch (error) {
+            console.error("Failed to remove album from favorites display:", error);
+            setError("Failed to remove album, try again later.")
+        }
+        console.log(`Successfully deleted album:, ${newFavorites[index].title} by ${newFavorites[index].artist}`);
+        newFavorites[index] = null;
         setFavorites(newFavorites);
     };
 
@@ -56,7 +98,7 @@ const ProfilePage = ({ albumReviews, favorites, setFavorites, accessToken }) => 
                     return (
                         <div key={index}>
                             <Card className="album-card-no-pointer">
-                                <img src={album ? album.images[0].url : VinylRecord} alt={album ? album.name : "Vinyl record stock image"}  title={album ? album.name : "Vinyl record stock image"} className="album-artwork" />
+                                <img src={album ? album.imageUrl : VinylRecord} alt={album ? album.name : "Vinyl record stock image"} title={album ? album.name : "Vinyl record stock image"} className="album-artwork" />
                             </Card>
                             {album ? (
                                 <Button onClick={() => handleRemoveFavorite(index)}>Remove</Button>
