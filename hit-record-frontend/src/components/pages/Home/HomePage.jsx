@@ -27,7 +27,7 @@ const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
                     return (
                         <div key={index}>
                             <Card className="album-card-no-pointer">
-                                <img src={album ? album.images[0].url : VinylRecord} alt={album ? album.name : "Vinyl record stock image"}  title={album ? album.name : "Vinyl record stock image"} className="album-artwork" />
+                                <img src={album ? album.imageUrl : VinylRecord} alt={album ? album.title : "Vinyl record stock image"}  title={album ? album.title : "Vinyl record stock image"} className="album-artwork" />
                             </Card>
                         </div>
                     )

@@ -1,41 +1,41 @@
 import { useNavigate } from "react-router";
 import AlbumShelf from "../common/AlbumShelf";
 import Card from "../common/Card";
-import { useAuth } from "../contexts/AuthContext";
-import { useEffect } from "react";
+// import { useAuth } from "../contexts/AuthContext";
+// import { useEffect } from "react";
 import VinylRecord from "../images/VinylRecord.png"
 
 const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReviews }) => {
 
     let navigate = useNavigate();
 
-    const { authUser } = useAuth();
+    // const { authUser } = useAuth();
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const fetchUserReviews = async () => {
+    //     const fetchUserReviews = async () => {
 
-            if (!authUser) {
-                return;
-            }
+    //         if (!authUser) {
+    //             return;
+    //         }
 
-            let fetchParams = {
-                method: "GET",
-                headers: { "Content-Type": "application/json" }
-            }
+    //         let fetchParams = {
+    //             method: "GET",
+    //             headers: { "Content-Type": "application/json" }
+    //         }
 
-            const response = await fetch(`http://localhost:8080/posts/user/${authUser.id}`, fetchParams);
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    //         const response = await fetch(`http://localhost:8080/posts/user/${authUser.id}`, fetchParams);
+    //         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-            const fetchedAlbumReviews = await response.json();
+    //         const fetchedAlbumReviews = await response.json();
 
-            setAlbumReviews(fetchedAlbumReviews.reverse());
+    //         setAlbumReviews(fetchedAlbumReviews.reverse());
 
-        }
+    //     }
 
-        fetchUserReviews();
+    //     fetchUserReviews();
 
-    }, [authUser]);
+    // }, [authUser, setAlbumReviews]);
 
     const calculateAvg = (reviews) => {
 
