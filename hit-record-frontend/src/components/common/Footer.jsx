@@ -3,8 +3,9 @@ const Footer = () => {
 
     return (
         <>
-            <footer>
-                &copy; {thisYear} | Hit Record
+            <footer style={{justifyContent:"center"}}>
+                &copy; {thisYear} &nbsp;| &nbsp; Hit Record &nbsp; | &nbsp;
+                <a href="https://github.com/kantojoey/Unit2-Final-AlexisT" style={{color:"white"}}> Visit my GitHub Repo!</a>
             </footer>
         </>
     );
