@@ -2,8 +2,12 @@ import { Link, useNavigate } from "react-router";
 import Card from "../../common/Card";
 import Button from "../../common/Button";
 import VinylRecord from "../../images/VinylRecord.png"
+import { useState } from "react";
+import ConfirmModal from "../../common/ConfirmModal";
 
 const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
+
+    const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
     let navigate = useNavigate();
 
@@ -19,13 +23,17 @@ const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
         return "★".repeat(expandedAlbumReview.rating);
     }
 
-    const deletePost = async () => {
+    const handleClickCancel = () => {
+        setDeleteConfirmation(null);
+    };
 
-        const confirmDelete = window.confirm("Are you sure you want to delete this post? This cannot be undone.");
+    const handleClickDelete = () => {
+        setDeleteConfirmation(true);
+    }
 
-        if (!confirmDelete) {
-            return;
-        }
+    const confirmDeletePost = async () => {
+
+        setDeleteConfirmation(false);
 
         try {
             const response = await fetch(`http://localhost:8080/posts/${expandedAlbumReview.id}`, { method: "DELETE" })
@@ -91,13 +99,18 @@ const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
                         </Card>
                     </div>
                     <div className="edit-post-options">
-                        <Button className="delete-post-button" onClick={deletePost}>
+                        <Button className="delete-post-button" onClick={handleClickDelete}>
                             Delete
                         </Button>
                         <Button className="edit-post-button" onClick={editPost}>
                             Edit
                         </Button>
                     </div>
+                    {deleteConfirmation &&
+                        <ConfirmModal
+                            message="Are you sure you want to delete this post?"
+                            onCancel={handleClickCancel}
+                            onConfirm={confirmDeletePost} />}
                 </>
             ) : (
                 <>
