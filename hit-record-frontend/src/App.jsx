@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, ScrollRestoration } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import './App.css'
 import Header from './components/common/Header'
 import LoadingPage from './components/pages/LoadingPage'

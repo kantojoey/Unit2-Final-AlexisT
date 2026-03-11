@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import VinylRecord from "../images/VinylRecord.png"
 import LogInForm from "../userInformation/LogInForm";
 import SignUpForm from "../userInformation/SignUpForm";
@@ -6,6 +6,16 @@ import SignUpForm from "../userInformation/SignUpForm";
 const LoadingPage = () => {
 
     const [formType, setFormType] = useState(null);
+
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        if (formType && formRef.current) {
+            formRef.current.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    }, [formType]);
 
     return (
         <main>
@@ -15,8 +25,10 @@ const LoadingPage = () => {
                     <button className="loading-button" onClick={() => setFormType("login")}>Log In</button>
                     <button className="loading-button" onClick={() => setFormType("signup")}>Sign Up</button>
                 </div>
-                {formType === "login" && <LogInForm />}
-                {formType === "signup" && <SignUpForm />}
+                <div ref={formRef}>
+                    {formType === "login" && <LogInForm />}
+                    {formType === "signup" && <SignUpForm />}
+                </div>
             </div>
         </main>
 
