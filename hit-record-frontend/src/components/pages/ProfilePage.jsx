@@ -101,7 +101,7 @@ const ProfilePage = ({ albumReviews, favorites, setFavorites, accessToken }) => 
                                 <img src={album ? album.imageUrl : VinylRecord} alt={album ? album.name : "Vinyl record stock image"} title={album ? album.name : "Vinyl record stock image"} className="album-artwork" />
                             </Card>
                             {album ? (
-                                <Button onClick={() => handleRemoveFavorite(index)}>Remove</Button>
+                                <Button className={"remove-favorite"} onClick={() => handleRemoveFavorite(index)}>Remove</Button>
                             ) : <></>}
                         </div>
                     )

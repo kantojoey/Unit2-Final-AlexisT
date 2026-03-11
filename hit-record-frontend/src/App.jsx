@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import ReviewPage from './components/pages/Search/ReviewPage'
 import ProtectedRoute from './components/pages/ProtectedRoute'
 import { useAuth } from './components/contexts/AuthContext'
+import LoggedInRoute from './components/pages/LoggedInRoute'
 
 
 // API User ID and Key for access
@@ -103,37 +104,40 @@ function App() {
   }, [authUser]);
 
   // Fetches stored reviews on login
-      useEffect(() => {
+  useEffect(() => {
 
-        const fetchUserReviews = async () => {
+    const fetchUserReviews = async () => {
 
-            if (!authUser) {
-                return;
-            }
+      if (!authUser) {
+        return;
+      }
 
-            let fetchParams = {
-                method: "GET",
-                headers: { "Content-Type": "application/json" }
-            }
+      let fetchParams = {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      }
 
-            const response = await fetch(`http://localhost:8080/posts/user/${authUser.id}`, fetchParams);
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      const response = await fetch(`http://localhost:8080/posts/user/${authUser.id}`, fetchParams);
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-            const fetchedAlbumReviews = await response.json();
+      const fetchedAlbumReviews = await response.json();
 
-            setAlbumReviews(fetchedAlbumReviews.reverse());
+      setAlbumReviews(fetchedAlbumReviews.reverse());
 
-        }
+    }
 
-        fetchUserReviews();
+    fetchUserReviews();
 
-    }, [authUser]);
+  }, [authUser]);
 
   return (
     <div id="body-container">
       <Header />
       <Routes>
-        <Route path="/" element={<LoadingPage />} />
+        <Route path="/" element={
+          <LoggedInRoute>
+        <LoadingPage />
+        </LoggedInRoute>} /> 
         <Route path="/home" element={
           <ProtectedRoute>
             <HomePage albumReviews={albumReviews} setexpandedAlbumReview={setexpandedAlbumReview} favorites={favorites} />
