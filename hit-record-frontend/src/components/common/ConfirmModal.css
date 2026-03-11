@@ -1,0 +1,32 @@
+/* Overlay covers the entire viewport */
+/* Keeps position fixed when scrolling, sets a dim background to make page look grayed out, centers content vertically + horizontally, sets above all other layers with z-index value */
+.confirm-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Box that holds question/buttons */
+.confirm-modal-box {
+    background-color: #222;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    min-width: 300px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons container */
+.confirm-modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+}
