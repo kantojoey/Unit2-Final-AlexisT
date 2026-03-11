@@ -92,7 +92,7 @@ footer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     justify-items: center;
-    align-items: start;
+    align-items: center;
     gap: 1rem;
     border: 0.2rem solid rgb(192 132 252);
     margin: 50px 50px;
@@ -109,7 +109,7 @@ footer {
     background-color: #6b21a8;
     border: 0.1rem solid rgb(192 132 252);
     cursor: pointer;
-    width: 10vw;
+    max-width: 120px;
     height: 50px;
     border-radius: 6px;
     font-size: 1.5rem;

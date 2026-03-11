@@ -418,6 +418,16 @@ main {
     text-align: center;
 }
 
+.favorites-display>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.remove-favorite {
+    margin-top: 10px;
+}
+
 
 /** MEDIA QUERIES **/
 /* Tablet (≤1024px) */
