@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router'
+import { Navigate, Route, Routes, ScrollRestoration } from 'react-router'
 import './App.css'
 import Header from './components/common/Header'
 import LoadingPage from './components/pages/LoadingPage'
@@ -15,6 +15,7 @@ import ReviewPage from './components/pages/Search/ReviewPage'
 import ProtectedRoute from './components/pages/ProtectedRoute'
 import { useAuth } from './components/contexts/AuthContext'
 import LoggedInRoute from './components/pages/LoggedInRoute'
+import ScrollToTop from './components/ScrollToTop'
 
 
 // API User ID and Key for access
@@ -133,6 +134,7 @@ function App() {
   return (
     <div id="body-container">
       <Header />
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={
           <LoggedInRoute>
