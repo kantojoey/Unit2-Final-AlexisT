@@ -14,8 +14,12 @@ body {
 #body-container {
     display: flex;
     flex-direction: column;
-    min-height: 150vh;
-    max-height: 150vh;
+    /* min-height: 150vh;
+    max-height: 150vh; */
+    min-height: 100vh;
+    /* optional */
+    max-height: auto;
+    /* remove fixed 150vh */
 }
 
 main {
