@@ -6,7 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
 
-    const {authUser} = useAuth();
+    const { authUser } = useAuth();
 
     let navigate = useNavigate();
 
@@ -15,19 +15,17 @@ const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
         navigate("/home/details");
 
     };
-    
+
     return (
         <main>
             <h3><i>Welcome to your music homepage, {authUser.username}! Let's get listening.</i></h3>
-            <Link to="/profile" style={{ color: "white" }}>
-                <h1><strong>My Favorites at a glance</strong></h1>
-            </Link>
+            <h1><strong>My Favorites at a glance</strong></h1>
             <AlbumShelf className="favorites-display">
                 {favorites.map((album, index) => {
                     return (
                         <div key={index}>
                             <Card className="album-card-no-pointer">
-                                <img src={album ? album.imageUrl : VinylRecord} alt={album ? album.title : "Vinyl record stock image"}  title={album ? album.title : "Vinyl record stock image"} className="album-artwork" />
+                                <img src={album ? album.imageUrl : VinylRecord} alt={album ? album.title : "Vinyl record stock image"} title={album ? album.title : "Vinyl record stock image"} className="album-artwork" />
                             </Card>
                         </div>
                     )

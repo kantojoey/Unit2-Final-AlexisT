@@ -75,6 +75,7 @@ const SignUpForm = () => {
                     type="text"
                     id="firstName"
                     name="firstName"
+                    placeholder="Enter First Name..."
                     onChange={handleChange}
                     required
                 />
@@ -86,6 +87,7 @@ const SignUpForm = () => {
                     type="text"
                     id="lastName"
                     name="lastName"
+                    placeholder="Enter Last Name..."
                     onChange={handleChange}
                     required
                 />
@@ -97,6 +99,8 @@ const SignUpForm = () => {
                     type="text"
                     id="username"
                     name="username"
+                    placeholder="Enter Username..."
+                    minLength={4}
                     onChange={handleChange}
                     required
                 />
@@ -108,6 +112,8 @@ const SignUpForm = () => {
                     type="password"
                     id="password"
                     name="password"
+                    placeholder="Enter Password..."
+                    minLength={8}
                     onChange={handleChange}
                     required
                 />
