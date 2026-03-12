@@ -35,19 +35,19 @@ function App() {
   // Album review text
   const [reviewText, setReviewText] = useState("");
 
-  // Album expanded details page setter
+  // Expanded album review details
   const [expandedAlbumReview, setexpandedAlbumReview] = useState(null);
 
   // API access token
   const [accessToken, setAccessToken] = useState();
 
-  // Favorite Album Array
+  // Favorite Album Array limited to 4 objects
   const [favorites, setFavorites] = useState([null, null, null, null]);
 
-  // Gets the logged in user to fetch favorites
+  // Gets the logged in user object that will be used with useEffect() to fetch stored favorites + reviews
   const { authUser } = useAuth();
 
-  // Gets API access token by posting key
+  // Gets API access token by posting client id + key
   useEffect(() => {
     let authCredentials = {
       method: "POST",
@@ -71,6 +71,7 @@ function App() {
 
     const fetchFavorites = async () => {
 
+      // Returns if no user is logged in
       if (!authUser) {
         return;
       }
@@ -87,6 +88,7 @@ function App() {
 
         const fetchedAlbumReviews = await response.json();
 
+        // Creating copy of array to avoid modifying original array from API response
         const limitedFourFavorites = [...fetchedAlbumReviews];
 
         while (limitedFourFavorites.length < 4) {
@@ -123,6 +125,7 @@ function App() {
 
       const fetchedAlbumReviews = await response.json();
 
+      // Reverse order so most recent load first
       setAlbumReviews(fetchedAlbumReviews.reverse());
 
     }

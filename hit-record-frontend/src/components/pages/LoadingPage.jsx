@@ -9,6 +9,7 @@ const LoadingPage = () => {
 
     const formRef = useRef(null);
 
+    // Focuses the log-in or sign-up form
     useEffect(() => {
         if (formType && formRef.current) {
             formRef.current.scrollIntoView({

@@ -13,6 +13,7 @@ const Header = () => {
         setAuthUser(null);
         setIsLoggedIn(false);
 
+        // Removes the stored log in info from the local storage so it doesn't persist on refresh
         localStorage.removeItem("authUser");
         localStorage.removeItem("isLoggedIn");
 

@@ -15,6 +15,7 @@ const SearchBox = ({ accessToken, searchInput, setSearchInput, setAlbums }) => {
             },
         };
 
+        // Spotify API call:
         try {
             const response = await fetch(
                 "https://api.spotify.com/v1/search?q=" +

@@ -19,6 +19,7 @@ const ExpandedDetailsPage = ({ expandedAlbumReview, setAlbumReviews }) => {
 
     };
 
+    // Renders stars since they come back from DTO as an integer
     const renderStars = () => {
         return "★".repeat(expandedAlbumReview.rating);
     }
