@@ -1,4 +1,3 @@
-/* Overlay covers the entire viewport */
 /* Keeps position fixed when scrolling, sets a dim background to make page look grayed out, centers content vertically + horizontally, sets above all other layers with z-index value */
 .confirm-modal-overlay {
     position: fixed;

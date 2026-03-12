@@ -6,11 +6,13 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
 
+    // Access to logged in user
     const { authUser } = useAuth();
 
     let navigate = useNavigate();
 
-    const albumDetailExpander = (album) => {
+    // Sets the value to the album represented by the card that is clicked on UI
+    const albumReviewExpander = (album) => {
         setexpandedAlbumReview(album);
         navigate("/home/details");
 
@@ -37,7 +39,7 @@ const HomePage = ({ albumReviews, setexpandedAlbumReview, favorites }) => {
             <AlbumShelf>
                 {albumReviews && albumReviews.length > 0 ? (albumReviews.slice(0, 8).map((post) => {
                     return (
-                        <Card key={post.id} className="album-card" onClick={() => albumDetailExpander(post)}>
+                        <Card key={post.id} className="album-card" onClick={() => albumReviewExpander(post)}>
                             <img src={post.album.imageUrl || VinylRecord} className="album-artwork" alt={post.album.title} title={post.album.title}></img>
                         </Card>
                     )

@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router";
 import AlbumShelf from "../common/AlbumShelf";
 import Card from "../common/Card";
-// import { useAuth } from "../contexts/AuthContext";
-// import { useEffect } from "react";
 import VinylRecord from "../images/VinylRecord.png"
 
 const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReviews }) => {
@@ -18,15 +16,16 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
     };
 
 
-    const albumDetailExpander = (album) => {
+    const albumReviewExpander = (album) => {
         setexpandedAlbumReview(album);
         navigate("/home/details");
     };
 
-    const sortReviews = (event) => {
+    const sortReviews = (e) => {
 
-        const option = event.target.value;
+        const option = e.target.value;
 
+        // Avoids modifying original array
         const sorted = [...albumReviews];
 
         switch (option) {
@@ -44,10 +43,10 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
                 sorted.sort((a, b) => b.album.title.localeCompare(a.album.title));
                 break;
             case "highToLow":
-                sorted.sort((a, b) => b.rating.length - a.rating.length);
+                sorted.sort((a, b) => b.rating - a.rating);
                 break;
             case "lowToHigh":
-                sorted.sort((a, b) => a.rating.length - b.rating.length);
+                sorted.sort((a, b) => a.rating - b.rating);
                 break;
             case "newestFirst":
                 sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -88,7 +87,7 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
                 <option value="" disabled hidden>Sort your reviews</option>
                 <option value="newestFirst">Newest Reviews First</option>
                 <option value="oldestFirst">Oldest Reviews First</option>
-                <option value="highToLow">Rating (High - Low)</option>
+                <option value="highToLow">Rating (High-Low)</option>
                 <option value="lowToHigh">Rating(Low-High)</option>
                 <option value="artistAscending">Artist (A-Z)</option>
                 <option value="artistDescending">Artist (Z-A)</option>
@@ -98,7 +97,7 @@ const ListeningLogPage = ({ albumReviews, setexpandedAlbumReview, setAlbumReview
             <AlbumShelf>
                 {albumReviews && albumReviews.length > 0 ? (albumReviews.map((post) => {
                     return (
-                        <Card key={post.id} className="album-card" onClick={() => albumDetailExpander(post)}>
+                        <Card key={post.id} className="album-card" onClick={() => albumReviewExpander(post)}>
                             <img src={post.album.imageUrl || VinylRecord} alt={post.album.title} title={post.album.title} className="album-artwork"></img>
                         </Card>
                     )

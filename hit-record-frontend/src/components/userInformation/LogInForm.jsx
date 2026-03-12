@@ -12,10 +12,12 @@ const LogInForm = () => {
 
     const [validationError, setValidationError] = useState("");
 
+    // Access to logged in user and logged in status
     const {setAuthUser, setIsLoggedIn} = useAuth();
 
     const navigate = useNavigate();
 
+    // Updates values for username and password for request body
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -49,9 +51,8 @@ const LogInForm = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
+            // Saves confirmed user object from backend DTO
             const newUser = await response.json();
-            console.log("Successfully signed in user:", newUser);
-
 
             setAuthUser(newUser);
             setIsLoggedIn(true);

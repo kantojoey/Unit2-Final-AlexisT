@@ -8,23 +8,28 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
 
     const {authUser} = useAuth();
     const navigate = useNavigate();
+
     // postID from url parameter
     const { postId } = useParams();
-    // retrieves sent state from navigate()
+
+    // Retrieves sent state from navigate()
     const location = useLocation();
-    // accesses state field of location() and checks if the post object exists
-    // if post object is empty, gives null value so app doesn't crash
+
+    // Accesses state field of location() and checks if the post object exists
+    // If post object is empty, gives null value so app doesn't crash
     const postToEdit = location.state?.post;
 
-    // derived boolean shorthand value; determines if "editing" is true or false (new post)
+    // Derived boolean shorthand value; determines if "editing" is true or false 
+    // If post has an id, (!postId) is false, so !!postId is true, and this is an edit
     const isEditing = !!postId;
-    // sets method and url based on edit vs create status
+
+    // Sets method and url based on edit vs create status
     const method = isEditing ? "PUT" : "POST";
     const url = isEditing ? `http://localhost:8080/posts/${postId}` : "http://localhost:8080/posts";
 
     // Normalize album data so UI always has same fields regardless of if the object is reviewedAlbum (frontend Spotify data structure) or postToEdit (backend DTO structure)
     const album = reviewedAlbum
-        // if this is a new review, reviewedAlbum is set and this becomes the album object
+        // If this is a new review, reviewedAlbum is set and this becomes the album object
         ? {
             title: reviewedAlbum.name,
             artist: reviewedAlbum.artists[0].name,
@@ -34,7 +39,7 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
             spotifyId: reviewedAlbum.id
         }
         : postToEdit
-            // if this is an edited review, it pulls the values from the backend DTO structure fields
+            // If this is an edited review, it pulls the values from the backend DTO structure fields
             ? {
                 title: postToEdit.album.title,
                 artist: postToEdit.album.artist,
@@ -63,6 +68,8 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
         if (!rating || !reviewText.trim()) return;
 
         // Sent to backend
+        // Rating is a string on front end, so we send length
+        // Album data from Spotify API
         const requestBody = {
             rating: rating.length,
             reviewText,
@@ -85,8 +92,6 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
 
         try {
             const response = await fetch(url, albumPostParams);
-            // null is the replacer function to edit the included content, 2 is the spacer (makes the JSON more readable by adding 2 spaces)
-            console.log(`${method === "PUT" ? "Updating" : "Posting"} review:`, JSON.stringify(requestBody, null, 2));
 
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
@@ -99,8 +104,6 @@ const ReviewPage = ({ reviewedAlbum, setReviewedAlbum, setAlbumReviews, rating, 
                 ...savedPost,
                 rating: numericRating
             };
-
-            console.log(`Successfully ${method === "PUT" ? "updated" : "posted"} review:`, JSON.stringify(newReview, null, 2));
 
             setAlbumReviews(prevReviews => {
                 if (isEditing) {

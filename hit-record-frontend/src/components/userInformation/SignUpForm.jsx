@@ -5,37 +5,38 @@ import { useAuth } from "../contexts/AuthContext";
 
 const SignUpForm = () => {
 
-
-    const [signInRequest, setSignInRequest] = useState({
+    const [signUpRequest, setsignUpRequest] = useState({
         firstName: "",
         lastName: "",
         username: "",
         password: ""
     });
 
-    const [signInError, setSignInError] = useState("");
+    const [signUpError, setsignUpError] = useState("");
 
+    // Access to logged in user and logged in status
     const { setAuthUser, setIsLoggedIn } = useAuth();
 
     const navigate = useNavigate();
 
+    // Sets values for sign up request body
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        setSignInRequest({
-            ...signInRequest,
+        setsignUpRequest({
+            ...signUpRequest,
             [name]: value
         });
     };
 
     const handleReset = () => {
-        setSignInRequest({
+        setsignUpRequest({
             firstName: "",
             lastName: "",
             username: "",
             password: ""
         });
-        setSignInError("");
+        setsignUpError("");
     };
 
     const signUpUser = async (e) => {
@@ -45,16 +46,16 @@ const SignUpForm = () => {
             const response = await fetch("http://localhost:8080/users/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(signInRequest)
+                body: JSON.stringify(signUpRequest)
             });
 
             if (!response.ok) {
-                setSignInError("Please enter a valid username and password");
+                setsignUpError("Please enter a valid username and password");
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
+            // Saves new registered user object from backend DTO
             const newUser = await response.json();
-            console.log("New user registered:", newUser);
 
             setAuthUser(newUser);
             setIsLoggedIn(true);
@@ -119,7 +120,7 @@ const SignUpForm = () => {
                 />
             </div>
 
-            {signInError && <p style={{ color: "red" }}>{signInError}</p>}
+            {signUpError && <p style={{ color: "red" }}>{signUpError}</p>}
 
             <div className="user-buttons">
                 <input className="validation-button" type="reset" value="Clear" onClick={handleReset} />

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "./Button";
-import "./ConfirmModal.css"; // import the CSS file
+import "./ConfirmModal.css";
 
 // Takes in a message prop as well as a confirmation and cancel function
 const ConfirmModal = ({ message, onConfirm, onCancel }) => {
