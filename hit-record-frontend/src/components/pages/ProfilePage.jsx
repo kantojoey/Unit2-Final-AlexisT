@@ -56,7 +56,6 @@ const ProfilePage = ({ albumReviews, favorites, setFavorites, accessToken }) => 
             let newFavorites = [...favorites];
             newFavorites[emptyIndex] = addedAlbum;
             setFavorites(newFavorites);
-            console.log("Successfully added new album:", JSON.stringify(addedAlbum, null, 2));
 
         } catch (error) {
             console.error("Error adding album, try again later:", error);
@@ -77,7 +76,7 @@ const ProfilePage = ({ albumReviews, favorites, setFavorites, accessToken }) => 
             console.error("Failed to remove album from favorites display:", error);
             setError("Failed to remove album, try again later.")
         }
-        console.log(`Successfully deleted album:, ${newFavorites[index].title} by ${newFavorites[index].artist}`);
+
         newFavorites[index] = null;
         setFavorites(newFavorites);
     };
