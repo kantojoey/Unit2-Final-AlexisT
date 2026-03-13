@@ -232,4 +232,8 @@ footer {
         width: 25vw;
     }
 
+    .sign-out-icon {
+    font-size: 0.8rem;
+}
+
 }
