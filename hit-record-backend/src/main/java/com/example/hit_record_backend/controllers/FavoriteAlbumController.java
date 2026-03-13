@@ -27,13 +27,14 @@ public class FavoriteAlbumController {
     // Add new favorite album
     @PostMapping("/user/{userId}")
     public FavoriteAlbum addFavorite(@PathVariable Long userId, @RequestBody FavoriteAlbum favoriteAlbum) {
+
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
         favoriteAlbum.setUser(user);
         return favoriteAlbumRepository.save(favoriteAlbum);
     }
 
-//     Delete favorite album
+//     Delete favorite album verifying user and album ID
     @DeleteMapping("/user/{userId}/{favoriteId}")
     public void deleteFavoriteAlbum(@PathVariable Long userId, @PathVariable Long favoriteId) {
         FavoriteAlbum favorite = favoriteAlbumRepository.findById(favoriteId)
@@ -44,7 +45,6 @@ public class FavoriteAlbumController {
         }
 
         favoriteAlbumRepository.delete(favorite);
-//        favoriteAlbumRepository.deleteById(favoriteId);
     }
 
 }

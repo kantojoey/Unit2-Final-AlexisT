@@ -1,11 +1,12 @@
 package com.example.hit_record_backend.models;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "favorite_albums", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "spotifyAlbumId"}))
 public class FavoriteAlbum {
-
+    // Table columns
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,11 +23,13 @@ public class FavoriteAlbum {
     @Column(nullable = false)
     private String imageUrl;
 
+    // Relationship with users, many favorites for one user
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 
+    // Constructors
     public FavoriteAlbum(Long id, String spotifyAlbumId, String title, String artist, String imageUrl, User user) {
         this.id = id;
         this.spotifyAlbumId = spotifyAlbumId;
@@ -36,8 +39,10 @@ public class FavoriteAlbum {
         this.user = user;
     }
 
-    public FavoriteAlbum(){}
+    public FavoriteAlbum() {
+    }
 
+    // Getters + Setters
     public Long getId() {
         return id;
     }

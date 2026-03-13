@@ -1,17 +1,14 @@
 package com.example.hit_record_backend.models;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
-    // Table columns with unique username and non-nullable fields
+    // Table columns
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,7 +31,7 @@ public class User {
     private List<Post> posts;
 
     // Constructors
-    public User(Long id, String firstName, String lastName, String username, String password){
+    public User(Long id, String firstName, String lastName, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,11 +39,10 @@ public class User {
         this.password = password;
     }
 
-    public User(){}
+    public User() {
+    }
 
     // Getters + Setters
-
-
     public Long getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package com.example.hit_record_backend.models;
 
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +32,12 @@ public class Album {
     @Column(nullable = false)
     private String imageURL;
 
-    // Relationship with Posts
+    // Relationship with Posts, many posts can exist for one album
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
     // Constructors
-    public Album(Long id, String spotifyAlbumId,String title, String artist, Integer yearReleased, Integer numberOfTracks, String imageURL){
+    public Album(Long id, String spotifyAlbumId, String title, String artist, Integer yearReleased, Integer numberOfTracks, String imageURL) {
         this.id = id;
         this.spotifyAlbumId = spotifyAlbumId;
         this.title = title;
@@ -46,10 +47,10 @@ public class Album {
         this.imageURL = imageURL;
     }
 
-    public Album(){}
+    public Album() {
+    }
 
     // Getters + Setters
-
     public Long getId() {
         return id;
     }
@@ -106,7 +107,11 @@ public class Album {
         this.posts = posts;
     }
 
-    public String getImageURL() { return imageURL; }
+    public String getImageURL() {
+        return imageURL;
+    }
 
-    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.List;
 
+// Allows connection to frontend despite different ports
 @Configuration
 public class CorsConfig {
 

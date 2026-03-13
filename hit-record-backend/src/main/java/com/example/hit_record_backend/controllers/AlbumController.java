@@ -3,7 +3,6 @@ package com.example.hit_record_backend.controllers;
 
 import com.example.hit_record_backend.models.Album;
 import com.example.hit_record_backend.repositories.AlbumRepository;
-import com.example.hit_record_backend.repositories.PostRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,11 +13,8 @@ public class AlbumController {
 
     private final AlbumRepository albumRepository;
 
-    private final PostRepository postRepository;
-
-    public AlbumController(AlbumRepository albumRepository, PostRepository postRepository){
+    public AlbumController(AlbumRepository albumRepository){
         this.albumRepository = albumRepository;
-        this.postRepository = postRepository;
     }
 
     @GetMapping
