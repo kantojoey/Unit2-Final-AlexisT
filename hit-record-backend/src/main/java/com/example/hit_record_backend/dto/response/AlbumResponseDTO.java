@@ -1,5 +1,6 @@
 package com.example.hit_record_backend.dto.response;
 
+// Album data sent back to front end
 public class AlbumResponseDTO {
 
     private String title;
@@ -20,6 +21,7 @@ public class AlbumResponseDTO {
 
     public AlbumResponseDTO(){}
 
+    // Getters + Setters
     public String getTitle() {
         return title;
     }

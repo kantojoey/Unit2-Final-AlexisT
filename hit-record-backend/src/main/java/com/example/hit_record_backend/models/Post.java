@@ -1,7 +1,6 @@
 package com.example.hit_record_backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -12,7 +11,7 @@ public class Post {
 
     // Table columns
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -27,30 +26,29 @@ public class Post {
     @Column
     private LocalDateTime editedAt;
 
-    // Relationship with User
+    // Relationship with User, many posts to one user
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 
-    // Relationship with Album
+    // Relationship with Album, many posts to one album
     @ManyToOne
     @JoinColumn(name = "album_id", nullable = false)
     private Album album;
 
     // Constructors
-    public Post(Long id, Integer rating, String reviewText, LocalDateTime createdAt){
+    public Post(Long id, Integer rating, String reviewText, LocalDateTime createdAt) {
         this.id = id;
         this.rating = rating;
         this.reviewText = reviewText;
         this.createdAt = createdAt;
     }
 
-    public Post(){}
+    public Post() {
+    }
 
     // Getters + Setters
-
-
     public Long getId() {
         return id;
     }

@@ -1,22 +1,23 @@
 package com.example.hit_record_backend.dto.request;
 
+// Fields taken in from front end sign up form
 public class UserRegistrationDTO {
-    // Variables to take in from form
     private String firstName;
     private String lastName;
     private String username;
     private String password;
 
-    public UserRegistrationDTO(String firstName, String lastName, String username, String password){
+    public UserRegistrationDTO(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
     }
 
-    public UserRegistrationDTO(){}
+    public UserRegistrationDTO() {
+    }
 
-
+    // Getters + Setters
     public String getFirstName() {
         return firstName;
     }

@@ -1,5 +1,6 @@
 package com.example.hit_record_backend.dto.request;
 
+// Album info taken in from the front end when reviews are posted
 public class AlbumRequestDTO {
     private String title;
     private String artist;
@@ -19,6 +20,7 @@ public class AlbumRequestDTO {
 
     public AlbumRequestDTO(){}
 
+    // Getters + Setters
     public String getTitle() {
         return title;
     }

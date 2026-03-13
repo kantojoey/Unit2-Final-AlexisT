@@ -1,21 +1,23 @@
 package com.example.hit_record_backend.dto.response;
 
+// Variables to return in JSON Body to protect password
 public class UserResponseDTO {
-    // Variables to return in JSON Body to protect password
     private Long id;
     private String firstName;
     private String lastName;
     private String username;
 
-    public UserResponseDTO(Long id, String firstName, String lastName, String username){
+    public UserResponseDTO(Long id, String firstName, String lastName, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
     }
 
-    public UserResponseDTO(){}
+    public UserResponseDTO() {
+    }
 
+    // Getters + Setters
     public Long getId() {
         return id;
     }

@@ -1,5 +1,6 @@
 package com.example.hit_record_backend.dto.response;
 
+// User information attached to post responses
 public class UserSummaryDTO {
     private Long userId;
     private String username;
@@ -9,6 +10,7 @@ public class UserSummaryDTO {
         this.username = username;
     }
 
+    // Getters + Setters
     public UserSummaryDTO() {
     }
 

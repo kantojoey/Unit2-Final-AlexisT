@@ -22,6 +22,9 @@ public class UserService {
 
     // Portion that returns all users
     public List<UserResponseDTO> getAllUsers() {
+        // Converting the repository to a Stream<> allows for mapping to be applied
+        // Every user turned to UserResponseDTO structure
+        // Converted back to a List of DTOs
         return userRepository.findAll().stream().map(user -> new UserResponseDTO(
                 user.getId(),
                 user.getFirstName(),
@@ -31,7 +34,7 @@ public class UserService {
     }
 
     // Portion that gets user by ID
-    public UserResponseDTO getUserById(Long id){
+    public UserResponseDTO getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
 
         return new UserResponseDTO(
@@ -67,16 +70,16 @@ public class UserService {
 
     // Portion that logs in user
     public UserResponseDTO loginRequest(UserLoginDTO loginInfo) {
-        // VERIFIES USER EXISTS OR THROWS EXCEPTION
+        // Verifies user exists
         Optional<User> userLogin = userRepository.findByUsername(loginInfo.getUsername().trim());
 
-        if(userLogin.isEmpty()) {
+        if (userLogin.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That user doesn't exist!");
         }
-        // .GET() RETURNS ENTIRE FOUND USER OBJECT AND STORES IT IN acceptedUser
+        // .GET() returns found User object and stores in acceptedUser
         User acceptedUser = userLogin.get();
 
-        if(!acceptedUser.getPassword().equals((loginInfo.getPassword()))) {
+        if (!acceptedUser.getPassword().equals((loginInfo.getPassword()))) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Your password is incorrect!");
         }
 
@@ -88,8 +91,8 @@ public class UserService {
     }
 
     // Portion that deletes user
-    public void deleteUser(Long id){
-        if(!userRepository.existsById(id)){
+    public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
         }
         userRepository.deleteById(id);

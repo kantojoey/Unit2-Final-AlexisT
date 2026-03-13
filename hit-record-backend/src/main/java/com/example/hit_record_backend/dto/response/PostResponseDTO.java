@@ -21,8 +21,10 @@ public class PostResponseDTO {
         this.user = user;
     }
 
-    public PostResponseDTO() {}
+    public PostResponseDTO() {
+    }
 
+    // Getters + Setters
     public Long getId() {
         return id;
     }
@@ -55,7 +57,9 @@ public class PostResponseDTO {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getEditedAt() { return editedAt; }
+    public LocalDateTime getEditedAt() {
+        return editedAt;
+    }
 
     public void setEditedAt(LocalDateTime editedAt) {
         this.editedAt = editedAt;
@@ -69,7 +73,11 @@ public class PostResponseDTO {
         this.album = album;
     }
 
-    public UserSummaryDTO getUser() { return user; }
+    public UserSummaryDTO getUser() {
+        return user;
+    }
 
-    public void setUser(UserSummaryDTO user) { this.user = user; }
+    public void setUser(UserSummaryDTO user) {
+        this.user = user;
+    }
 }

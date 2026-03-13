@@ -40,11 +40,11 @@ public class PostService {
         List<Post> posts = postRepository.findByUserId(userId);
         // Creates new list of Post DTOs
         List<PostResponseDTO> responseList = new ArrayList<>();
-        // Converts each post entity into a post DTO
+        // Converts each post entity found in repository into a post response DTO
         for (Post post : posts) {
             responseList.add(mapToDTO(post));
         }
-        // Returns list of DTOs
+        // Returns list of response DTOs
         return responseList;
     }
 
@@ -63,7 +63,8 @@ public class PostService {
         );
 
         // Converts user into summary DTO structure
-        User user = post.getUser(); // get the associated user entity
+        // Gets the user entity associated with post
+        User user = post.getUser();
         UserSummaryDTO userSummaryDTO = new UserSummaryDTO(
                 user.getId(),
                 user.getUsername()
@@ -80,7 +81,7 @@ public class PostService {
         );
     }
 
-    // Service portion to get a post by ID
+    // Service portion to get a post by ID and convert to DTO
     public PostResponseDTO getPostById(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post not found"));
@@ -94,8 +95,8 @@ public class PostService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Created null album entity to be set from request
-        Album album = null;
-        // Uses spotify album ID to check if the album exists in DB
+        Album album;
+        // Uses spotify album ID to check if the album exists in DB to pull the data from backend
         if (request.getAlbum() != null && request.getAlbum().getSpotifyAlbumId() != null) {
             album = albumRepository.findBySpotifyAlbumId(request.getAlbum().getSpotifyAlbumId())
                     .orElseGet(() -> {
@@ -128,7 +129,7 @@ public class PostService {
     }
 
     // Portion that handles post updates
-    public PostResponseDTO updatePost(Long id, PostUpdateDTO updateRequest){
+    public PostResponseDTO updatePost(Long id, PostUpdateDTO updateRequest) {
         // Verify post exists
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         // Update fields from PostUpdateDTO
@@ -142,8 +143,8 @@ public class PostService {
     }
 
     // Portion that handles post deletions
-    public void deletePost(Long id){
-        if(!postRepository.existsById(id)){
+    public void deletePost(Long id) {
+        if (!postRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found!");
         }
         postRepository.deleteById(id);

@@ -18,7 +18,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    // Get all posts from user
+    // Get all posts from user using formatted response DTO
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<PostResponseDTO>> getAllPosts(@PathVariable Long userId){
         return ResponseEntity.ok(postService.getAllPosts(userId));
