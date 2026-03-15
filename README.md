@@ -134,9 +134,11 @@ After starting the backend, check MySQL Workbench to confirm the following table
 ## 🚀 Running the Application
 
 In **VS Code**, use the terminal to start the frontend development server:
+
 `npm run dev`
 
 *Your application will typically run at:*
+
 `http://localhost:5173/`
 
 **Once the application loads** you can:
