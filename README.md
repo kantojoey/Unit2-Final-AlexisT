@@ -69,6 +69,7 @@ These credentials will be used in your **frontend environment variables** to mak
 ## 📥 Clone the Repository
 
 Fork the [Hit Record GitHub repository](https://github.com/kantojoey/Unit2-Final-AlexisT) and **clone it to your local machine** in the terminal:
+
 `git clone [forked url]`
 
 ---
@@ -77,6 +78,7 @@ Fork the [Hit Record GitHub repository](https://github.com/kantojoey/Unit2-Final
 Open the `hit-record-frontend` folder in **VS Code**.
 
 Install dependencies in the terminal:
+
 `npm install`
 
 Create a .env file in the root of the frontend project and add:
@@ -111,6 +113,7 @@ spring.datasource.password=
 🔀 **Replace these values with your MySQL username and password if needed**.
 
 ▶️ **Run** the backend application:
+
 `HitRecordBackendApplication`
 
 ---
@@ -193,3 +196,8 @@ A preview of the wireframe and final production versions of Hit Record are avail
 - Add password hashing
 - Implement JWT authentication
 - Deploy the application to a cloud hosting platform
+
+---
+
+# 👨🏽‍💻 Creator & Designer
+Alexis Tinoco • [GitHub](https://github.com/kantojoey) • [LinkedIn](www.linkedin.com/in/tinoco-alexis)
