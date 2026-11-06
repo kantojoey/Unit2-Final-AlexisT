@@ -63,7 +63,8 @@ Visit the [Spotify Developer Dashboard](https://developer.spotify.com) and recei
 - Client Secret
 
 These credentials will be used in your **frontend environment variables** to make API calls for your album searches.
-**Disclaimer** A Spotify premium subscription is required to access the developer dashboard and receive a client ID.
+
+**DISCLAIMER:** A Spotify premium subscription is required to access the developer dashboard and receive a client ID.
 
 ---
 
